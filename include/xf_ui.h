@@ -11,9 +11,9 @@ typedef struct _Buffer MessageBuffer;
 typedef struct _DataBundle DataBundle;
 
 typedef int (*CallbackFcn)(const Event *evt);
-typedef int (*callFcn)(void);
 
-Listener* createListener(void (*fcn)(const Event*));
+Listener* createListener(const void *listener, void (*fcn)(const Event*));
+const void* getEventHandler(Event *evt);
 Agent* createAgent(const char *params, const Listener* listener);
 void sendMessage(const Agent* agent, const Message* msg);
 Message* buildMessage(int msgType, int arg0, int arg1, const char* params, const void *buf, const int bufLength);

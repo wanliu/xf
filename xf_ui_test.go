@@ -1,19 +1,79 @@
 package xf
 
 import (
+	"bytes"
 	"encoding/json"
 	"io"
 	"log"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/kr/pretty"
 )
 
+func receiveEvent(evt *Event) {
+	switch evt.EventType() {
+	case EventState:
+		state := (StateType)(evt.Arg1())
+		switch state {
+		case StateIdle:
+			log.Printf("EventState: %s\n", "IDLE")
+		case StateReady:
+			log.Printf("EventState: %s\n", "READY")
+		case StateWorking:
+			log.Printf("EventState: %s\n", "WORKING")
+		default:
+			log.Printf("InvalidState %d", state)
+		}
+	case EventVad:
+		vad := (VadType)(evt.Arg1())
+
+		switch vad {
+		case VadBos:
+			log.Printf("VadState: %s\n", "检测到开始")
+		case VadEos:
+			log.Printf("VadState: %s\n", "检测到结束")
+		case VadVol:
+			//
+		}
+	case EventResult:
+		info := evt.Info()
+		var (
+			result AIUIResult
+			data   AIUIResultData
+		)
+
+		if err := json.Unmarshal([]byte(info), &result); err != nil {
+			log.Printf("解析 Result 错误: %s", err)
+		}
+
+		data = result.Data[0]
+
+		if data.Params.Sub == "nlp" {
+			contentId := data.Content[0].CNT_ID
+			if len(contentId) == 0 {
+				log.Printf("missing contentId")
+			}
+
+			buffer := evt.Data().GetBinary(contentId)
+			var out bytes.Buffer
+			var buff = buffer.Data()
+			buff = buff[:len(buff)-1]
+			if err := json.Indent(&out, buff, "", "  "); err != nil {
+				log.Printf("格式化内容错误: %s", err)
+			}
+
+			log.Printf("output: %s", out.String())
+		}
+	case EventError:
+		log.Printf("Error Code : %d", evt.Arg1())
+	default:
+		log.Printf("消息 EventType: %d", evt.EventType())
+	}
+}
+
 func TestXFUI(t *testing.T) {
-	li := CreateListener(func(evt *Event) {
-
-	})
-
 	file, err := os.Open("aiui.cfg") // For read access.
 	if err != nil {
 		log.Fatal(err)
@@ -38,8 +98,7 @@ func TestXFUI(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	agent := CreateAgent(string(buf), li)
-	t.Logf("Listener %#v", li)
+	agent := NewAgent(string(buf))
 	t.Logf("Agent %#v", agent)
 	// agent.Start()
 	time.Sleep(time.Second)
@@ -49,7 +108,13 @@ func TestXFUI(t *testing.T) {
 	agent.SendMessage(msg)
 	msg.Destroy()
 
-	time.Sleep(3 * time.Second)
+	for evt := range agent.Events {
+		log.Printf("event: %# v", pretty.Formatter(evt))
+		log.Printf("eventType: %# v", evt.EventType())
+		// receiveEvent(evt)
+	}
+
+	// time.Sleep(3 * time.Second)
 }
 
 func TestXFUI_Wav(t *testing.T) {

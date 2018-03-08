@@ -13,6 +13,7 @@ struct _Listener {
 
 struct _Event {
 	IAIUIEvent *evt;
+	const void* handler;
 };
 
 struct _Agent {
@@ -33,6 +34,7 @@ struct _DataBundle {
 class AIUICallbackListener: virtual public AIUIListener {
 	private:
 		void (*_callback)(const Event* evt);
+		const void * _handler;
 
 	public:
 
@@ -40,22 +42,28 @@ class AIUICallbackListener: virtual public AIUIListener {
 		if (this->_callback) {
 			Event evt;
 			evt.evt = (IAIUIEvent*)&event;
+			evt.handler = this->_handler;
 			this->_callback(&evt);
 		}
 	}
 
-	void setCallback(void (*callback)(const Event *evt)) {
+	void setCallback(const void* handler, void (*callback)(const Event *evt)) {
 		this->_callback = callback;
+		this->_handler = handler;
 	}
 };
 
-Listener* createListener(void (*fcn)(const Event*)) {
+Listener* createListener(const void* handler, void (*fcn)(const Event*)) {
 	AIUICallbackListener* li = new AIUICallbackListener();
 
-	li->setCallback(fcn);
+	li->setCallback(handler, fcn);
     Listener* listener = new Listener();
 	listener->clListener = li;
 	return listener;
+}
+
+const void* getEventHandler(Event *evt) {
+	return evt->handler;
 }
 
 Agent* createAgent(const char *params, const Listener *listener) {

@@ -21,10 +21,12 @@ type Event struct {
 
 type Listener struct {
 	listener *C.Listener
+	agent    *Agent
 }
 
 type Agent struct {
-	agent *C.Agent
+	agent  *C.Agent
+	Events chan *Event
 }
 
 type Message struct {
@@ -41,9 +43,23 @@ type Map map[string]interface{}
 
 //export goEventListner
 func goEventListner(v *C.Event) int {
-	evt := &Event{
+	var evt = &Event{
 		event: v,
 	}
+
+	// handler := C.getEventHandler(v)
+	// t := reflect.TypeOf(Listener{})
+	// vv := reflect.NewAt(t, handler)
+	// log.Printf("event handler %v %s", vv, vv.Type().String())
+	// listener, ok := vv.Interface().(*Listener)
+	// if !ok {
+	// 	log.Printf("listener convert failed")
+	// }
+
+	// log.Printf("listener agent %# v", listener)
+	// if listener.agent != nil {
+	// 	listener.agent.Events <- evt
+	// }
 
 	switch evt.EventType() {
 	case EventState:
@@ -69,7 +85,6 @@ func goEventListner(v *C.Event) int {
 		case VadVol:
 			//
 		}
-
 	case EventResult:
 		info := evt.Info()
 		var (
@@ -100,7 +115,6 @@ func goEventListner(v *C.Event) int {
 
 			log.Printf("output: %s", out.String())
 		}
-
 	case EventError:
 		log.Printf("Error Code : %d", evt.Arg1())
 	default:
@@ -111,7 +125,7 @@ func goEventListner(v *C.Event) int {
 
 func CreateListener(handle func(evt *Event)) *Listener {
 	var listener Listener
-	li := C.createListener((C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
+	li := C.createListener(unsafe.Pointer(&listener), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
 	listener.listener = li
 
 	return &listener
@@ -119,9 +133,31 @@ func CreateListener(handle func(evt *Event)) *Listener {
 
 func CreateAgent(params string, listener *Listener) *Agent {
 	agent := C.createAgent(C.CString(params), listener.listener)
-	return &Agent{
-		agent: agent,
+	var a = Agent{
+		agent:  agent,
+		Events: make(chan *Event, 0),
 	}
+	listener.agent = &a
+	return &a
+}
+
+func NewListener() *Listener {
+	var listener Listener
+	li := C.createListener(unsafe.Pointer(&listener), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
+	listener.listener = li
+
+	return &listener
+}
+
+func NewAgent(params string) *Agent {
+	listener := NewListener()
+	agent := C.createAgent(C.CString(params), listener.listener)
+	var a = Agent{
+		agent:  agent,
+		Events: make(chan *Event, 0),
+	}
+	listener.agent = &a
+	return &a
 }
 
 func (agt *Agent) Start() {
@@ -258,4 +294,8 @@ func (db *DataBundle) GetBinary(key string) *Buffer {
 func (buf *Buffer) Data() []byte {
 	size := C.BufferGetSize(buf.buffer)
 	return C.GoBytes(C.BufferGetData(buf.buffer), size)
+}
+
+func RegisterListener() {
+
 }
