@@ -1,0 +1,1762 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fa",
+				"Fatalf\t ƒ"
+			],
+			[
+				"mi",
+				"Millisecond\t Ɩ"
+			],
+			[
+				"QISSes",
+				"QISESessionEnd\terror ƒ"
+			],
+			[
+				"Fal",
+				"Fatalf\t ƒ"
+			],
+			[
+				"praam",
+				"paramValue\t[32]C.char ν"
+			],
+			[
+				"param",
+				"paramValue\t ν"
+			],
+			[
+				"Pa",
+				"paramValue\t[32]C.char ν"
+			],
+			[
+				"rst",
+				"rsltStatus\tC.int ν"
+			],
+			[
+				"gran",
+				"grammarLength\tuint ν"
+			],
+			[
+				"_g",
+				"_grammarType\tstring ν"
+			],
+			[
+				"wave",
+				"waveLen\tC.uint ν"
+			],
+			[
+				"rs",
+				"rsltStatus\tC.int ν"
+			],
+			[
+				"parm",
+				"paramValue\t[32]C.char ν"
+			],
+			[
+				"cont",
+				"constants\tmodule"
+			],
+			[
+				"trans_retu",
+				"trans_return_def"
+			],
+			[
+				"gen",
+				"gen_xf"
+			],
+			[
+				"MS",
+				"MSPLogout\tint ƒ"
+			],
+			[
+				"t",
+				"type"
+			],
+			[
+				"trans",
+				"trans_arg_define"
+			],
+			[
+				"trnas",
+				"trans_zero"
+			],
+			[
+				"tr",
+				"trans_zero"
+			],
+			[
+				"call",
+				"call_with"
+			],
+			[
+				"stat",
+				"state_val"
+			],
+			[
+				"trans_st",
+				"trans_status_val"
+			],
+			[
+				"Tran",
+				"Transpile"
+			],
+			[
+				"Trs",
+				"Transpile"
+			],
+			[
+				"retu",
+				"return_type"
+			],
+			[
+				"is",
+				"is_pointer"
+			],
+			[
+				"retusn",
+				"returns"
+			],
+			[
+				"trans_r",
+				"trans_return"
+			],
+			[
+				"p",
+				"pointers"
+			],
+			[
+				"point",
+				"pointer"
+			],
+			[
+				"trans_ru",
+				"trans_return_def"
+			],
+			[
+				"reut",
+				"return_type"
+			],
+			[
+				"retun",
+				"returns"
+			],
+			[
+				"ret",
+				"ret_item"
+			],
+			[
+				"__get",
+				"__getattribute__"
+			],
+			[
+				"after",
+				"after_name"
+			],
+			[
+				"E",
+				"ERROR_RETURN_EXCLUDES"
+			],
+			[
+				"P",
+				"PointerReturnTransform"
+			],
+			[
+				"R",
+				"POINTER_RETURN_ARG"
+			],
+			[
+				"TYPES",
+				"TYPE_CONVERTS"
+			],
+			[
+				"Stat",
+				"StatusTransform"
+			],
+			[
+				"Wrap",
+				"WrapperFeature"
+			],
+			[
+				"Statu",
+				"STATUS_RETURN"
+			],
+			[
+				"return",
+				"return_type"
+			],
+			[
+				"ski",
+				"skip_space"
+			],
+			[
+				"all",
+				"allLength"
+			],
+			[
+				"mS",
+				"MsgType"
+			],
+			[
+				"h",
+				"height\tfloat64 ν"
+			],
+			[
+				"marg",
+				"marginTop\tfloat64 ν"
+			],
+			[
+				"mar",
+				"marginRight\tfloat64 ν"
+			],
+			[
+				"cel",
+				"cellWidth\tfloat64 ν"
+			],
+			[
+				"col",
+				"columnWidths\t[]float64 ν"
+			],
+			[
+				"f",
+				"headFontSize\tfloat64 ν"
+			],
+			[
+				"GetF",
+				"GetFontFolder\tstring ƒ"
+			],
+			[
+				"setLin",
+				"SetLineWidth\t ƒ"
+			],
+			[
+				"c",
+				"Close\t ƒ"
+			],
+			[
+				"goods",
+				"goodsid"
+			],
+			[
+				"filter",
+				"filterFunction"
+			],
+			[
+				"Str",
+				"StringValue"
+			],
+			[
+				"Mes",
+				"MessageAttributes"
+			],
+			[
+				"V",
+				"Value\tinterface{} ƒ"
+			],
+			[
+				"bord",
+				"border-right"
+			],
+			[
+				"table",
+				"tableOption"
+			],
+			[
+				"batc",
+				"batchrefid"
+			],
+			[
+				"batch",
+				"batchcode"
+			],
+			[
+				"unit",
+				"unitid"
+			],
+			[
+				"bil",
+				"billdate"
+			],
+			[
+				"un",
+				"unittype"
+			],
+			[
+				"keyval",
+				"keyvaluetable"
+			],
+			[
+				"tab",
+				"tablename"
+			],
+			[
+				"tabl",
+				"tableOption"
+			],
+			[
+				"on",
+				"onlyUnique"
+			],
+			[
+				"ke",
+				"KeyboardInterrupt"
+			],
+			[
+				"b",
+				"batch_queries"
+			],
+			[
+				"mis",
+				"mismatch"
+			],
+			[
+				"prod",
+				"products"
+			],
+			[
+				"enc",
+				"ENDC"
+			],
+			[
+				"bol",
+				"bcolors"
+			],
+			[
+				"F",
+				"FAIL"
+			],
+			[
+				"Mi",
+				"Millisecond\t Ɩ"
+			],
+			[
+				"SYnc",
+				"SyncProducts"
+			],
+			[
+				"last",
+				"lastID"
+			],
+			[
+				"create",
+				"createGoodUnits"
+			],
+			[
+				"golb",
+				"globalNodes"
+			],
+			[
+				"globa",
+				"globalNodes"
+			],
+			[
+				"sour",
+				"sourceProducts"
+			],
+			[
+				"goodUn",
+				"goodUnities"
+			],
+			[
+				"prduct",
+				"productName"
+			],
+			[
+				"eror",
+				"errors"
+			],
+			[
+				"min",
+				"missingBarcode"
+			],
+			[
+				"miss",
+				"missingBarcode"
+			],
+			[
+				"good",
+				"goodsid"
+			],
+			[
+				"unam",
+				"unitname"
+			],
+			[
+				"sale",
+				"salerName"
+			],
+			[
+				"inv",
+				"invoiceid"
+			],
+			[
+				"cus",
+				"customerId"
+			],
+			[
+				"id",
+				"ID"
+			],
+			[
+				"in",
+				"invoiceid"
+			],
+			[
+				"at",
+				"attrs"
+			],
+			[
+				"atr",
+				"attrNames"
+			],
+			[
+				"cusm",
+				"customerId"
+			],
+			[
+				"bill",
+				"billtypeid"
+			],
+			[
+				"ordre",
+				"orderBy"
+			],
+			[
+				"custo",
+				"customerId"
+			],
+			[
+				"cust",
+				"customer"
+			],
+			[
+				"pri",
+				"printer"
+			],
+			[
+				"print",
+				"printerName"
+			],
+			[
+				"action",
+				"actionType"
+			],
+			[
+				"new",
+				"newMessages"
+			],
+			[
+				"gou",
+				"groupBy"
+			],
+			[
+				"pro",
+				"props\tReact: this.props."
+			],
+			[
+				"React",
+				"ReactDOM"
+			],
+			[
+				"tpl",
+				"tplName"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"border-bom",
+				"border-bottom"
+			],
+			[
+				"mes",
+				"messages"
+			],
+			[
+				"ap",
+				"appPath"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"back",
+				"background-repeat"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"me",
+				"messages"
+			],
+			[
+				"C",
+				"CANCELLED"
+			],
+			[
+				"conten",
+				"webContents"
+			],
+			[
+				"handl",
+				"handlePrinter"
+			],
+			[
+				"border-r",
+				"border-radius"
+			],
+			[
+				"printer",
+				"printerName"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "parser/trans/base.py",
+			"settings":
+			{
+				"buffer_size": 3493,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xf.go",
+			"settings":
+			{
+				"buffer_size": 15189,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xf_test.go",
+			"settings":
+			{
+				"buffer_size": 2251,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hysios/Downloads/bootstrap_generator.py",
+			"settings":
+			{
+				"buffer_size": 5979,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "string.go",
+			"settings":
+			{
+				"buffer_size": 375,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hysios/Documents/Linux_voice/samples/iat_sample/iat_sample.c",
+			"settings":
+			{
+				"buffer_size": 6521,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"a",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"formt",
+				"Pretty JSON: Format and Sort JSON"
+			],
+			[
+				"au",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"b",
+				"DocBlockr: Decorate line comment"
+			],
+			[
+				"blo",
+				"DocBlockr: Decorate line comment"
+			],
+			[
+				"block",
+				"DocBlockr: Decorate line comment"
+			],
+			[
+				"auto",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"import",
+				"GoSublime: Go to imports section"
+			],
+			[
+				"sftp",
+				"SFTP: Map to Remote…"
+			],
+			[
+				"gitb",
+				"Git Blame"
+			],
+			[
+				"pert",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"imp",
+				"ImportJS: fix all imports"
+			],
+			[
+				"fix",
+				"ImportJS: fix all imports"
+			],
+			[
+				"impor",
+				"ImportJS: fix all imports"
+			],
+			[
+				"els",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"sublinter",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"lint",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"es",
+				"ESLint"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"githi",
+				"Git: Commit history"
+			],
+			[
+				"git",
+				"Git Blame"
+			],
+			[
+				"format",
+				"Pretty JSON: Format and Sort JSON"
+			],
+			[
+				"for",
+				"Pretty JSON: Format and Sort JSON"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"gitcheck",
+				"Git: Checkout Current File"
+			],
+			[
+				"listpa",
+				"Package Control: List Packages"
+			],
+			[
+				"goimport",
+				"GoSublime: Go to imports section"
+			],
+			[
+				"ma",
+				"Material Theme: Activate theme"
+			],
+			[
+				"m",
+				"Material Theme: Extras"
+			],
+			[
+				"mat",
+				"Material Theme: Activate theme"
+			],
+			[
+				"box",
+				"Boxy Theme: Activation"
+			]
+		],
+		"width": 480.0
+	},
+	"console":
+	{
+		"height": 200.0,
+		"history":
+		[
+			"clear"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/hysios/GO/src/github.com/wanliu/xf"
+	],
+	"file_history":
+	[
+		"/Users/hysios/GO/src/github.com/wanliu/xf/.git/COMMIT_EDITMSG",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/.gitignore",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/ERRORS",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf.go",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/type.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf_test.go",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/pointer2ret.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/pretty.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/ret.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/status.py",
+		"/Users/hysios/Documents/DataSync/src/order/manager.js",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/pointer.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/error.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/__init__.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/parser.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/constants.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/call.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans/base.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/arg.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/wrapper.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/type.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf.sublime-project",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/include/xf.h",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/Makefile",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/include/msp_cmn.h",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/log.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/gen.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/Dockerfile",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf.y",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/gen/trans.go",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/pointer2ret.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/base.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/pretty.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/call.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/return.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/pointer.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/error.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/status.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transform.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf_parser/trans/base.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf_parser/trans/__init__.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf_parser/__init__.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/parser.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/wrapper.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/type.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser/transforms/__init__.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/.env/lib/python2.7/sre_parse.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/xf_parser/transform.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/transform.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/__init__.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/arg.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/type.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/transforms/type.py",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/GoSublime/GoSublime.sublime-settings",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform/transpile.py",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/transform.py",
+		"/Users/hysios/Desktop/client.ovpn",
+		"/Users/hysios/Desktop/client.ovpn 2",
+		"/Users/hysios/Downloads/key/client.ovpn",
+		"/Users/hysios/GO/src/github.com/wanliu/xf/parser.py",
+		"/Users/hysios/Desktop/client.txt",
+		"/Users/hysios/Downloads/key (1)/client.ovpn",
+		"/Users/hysios/Documents/Linux_voice/Dockerfile",
+		"/Users/hysios/Documents/Linux_voice/bin/gm_continuous_digit.abnf",
+		"/Users/hysios/Documents/EasyHook/sftp-config.json",
+		"/Users/hysios/Documents/weixin/sftp-config.json",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/User/sftp_servers/sftp-config.json",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/User/sftp_servers/windows10",
+		"/Users/hysios/Documents/react-sketchapp/examples/basic-setup/src/manifest.json",
+		"/Users/hysios/Documents/loveui/main.lua",
+		"/Users/hysios/Documents/DataSync/scripts/seed",
+		"/Users/hysios/Documents/DataSync/.git/COMMIT_EDITMSG",
+		"/Users/hysios/Downloads/config/client.ovpn",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/.git/COMMIT_EDITMSG",
+		"/Users/hysios/GO/src/github.com/wanliu/flow/.gitignore",
+		"/Users/hysios/Library/Application Support/Sublime Text 3/Packages/User/GoSublime.sublime-settings",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/bus/table_canvas.go",
+		"/Users/hysios/Documents/weixin/.git/COMMIT_EDITMSG",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/.git/MERGE_MSG",
+		"/Users/hysios/Documents/weixin/ansible/hosts",
+		"/Users/hysios/Documents/weixin/sqs.js",
+		"/Users/hysios/Documents/weixin/Makefile",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/server/reply.go",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/vendor/github.com/graphql-go/relay/examples/starwars/schema.go",
+		"/Users/hysios/GO/src/github.com/wanliu/brain.v2/vendor/github.com/wanliu/flow/context/reply.go",
+		"/Users/hysios/GO/src/github.com/wanliu/flow/.git/MERGE_MSG",
+		"/Users/hysios/Documents/SiteMaker/src/containers/App.css",
+		"/Users/hysios/Documents/talk_label/.git/MERGE_MSG",
+		"/Users/hysios/Documents/talk_label/.git/COMMIT_EDITMSG",
+		"/Users/hysios/Documents/DataSync/src/models/index.js",
+		"/Users/hysios/Documents/DataSync/src/server.js",
+		"/usr/local/etc/grafana/grafana.ini",
+		"/Users/hysios/Desktop/团队改进.md",
+		"/Users/hysios/Desktop/ 业余玩家如何共同的愉快玩耍.md",
+		"/Users/hysios/Desktop/团队改进",
+		"/Users/hysios/Documents/talk_label/send_test.py",
+		"/Users/hysios/Documents/talk_label/message6.log",
+		"/Users/hysios/Documents/talk_label/message9.log",
+		"/Users/hysios/Documents/talk_label/message7.log",
+		"/Users/hysios/Documents/talk_label/message4.log",
+		"/Users/hysios/Documents/talk_label/message5.log",
+		"/Users/hysios/Documents/talk_label/message1.log",
+		"/Users/hysios/Documents/talk_label/label1.csv",
+		"/Users/hysios/Documents/talk_label/.gitignore",
+		"/Users/hysios/Documents/DataSync/node_modules/sequelize/lib/errors.js",
+		"/Users/hysios/Documents/DataSync/src/App.css",
+		"/Users/hysios/Desktop/2017.12.05.overwatch.md",
+		"/Users/hysios/Documents/DataSync/.env",
+		"/Users/hysios/Documents/DataSync/src/queue/message.js",
+		"/Users/hysios/Documents/DataSync/src/queue/commandManager.js",
+		"/Users/hysios/Documents/DataSync/.git/MERGE_MSG",
+		"/Users/hysios/Documents/DataSync/src/sync.js",
+		"/Users/hysios/Documents/DataSync/node_modules/config-chain/test/env.js",
+		"/Users/hysios/Documents/DataSync/.importjs.js",
+		"/Users/hysios/Documents/DataSync/src/order/index.js",
+		"/Users/hysios/Documents/DataSync/src/utils.js",
+		"/Users/hysios/.zshrc",
+		"/usr/local/Cellar/openresty/1.11.2.4/nginx/logs/error.log",
+		"/Users/hysios/GO/src/github.com/go-kit/kit/examples/stringsvc3/nohup.out",
+		"/Users/hysios/GO/src/github.com/hellofresh/janus/pkg/config/specification",
+		"/Users/hysios/Documents/HugoEditor/node_modules/extract-text-webpack-plugin/index.js",
+		"/Users/hysios/Documents/go-auth/public/index.html",
+		"/Users/hysios/Documents/go-auth/auth2-proxy.cfg",
+		"/Users/hysios/Documents/DataSync/scripts/updateVersion.js",
+		"/Users/hysios/Documents/DataSync/node_modules/tedious/lib/connection.js",
+		"/Users/hysios/Documents/DataSync/node_modules/tedious/lib/errors.js"
+	],
+	"find":
+	{
+		"height": 70.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			"/Users/hysios/GO/src/github.com/wanliu/xf/parser/trans",
+			"/Users/hysios/GO/src/github.com/wanliu/xf/parser",
+			"/Users/hysios/GO/src/github.com/wanliu/xf/include",
+			"/Users/hysios/GO/src/github.com/wanliu/xf",
+			"/Users/hysios/GO/src/github.com/wanliu/xf/transform"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"QISESessionEnd",
+			"QISRSessionEnd",
+			"HINTS_SIZE",
+			"10108",
+			"defer",
+			"ret != C\\.MSP_SUCCESS\\s+{\\n.*?int\\(errorCode\\)",
+			"ret != C\\.MSP_SUCCESS\\s+\\n{.*?int\\(ret\\)",
+			"ret != C\\.MSP_SUCCESS\\s+{.*?int\\(ret\\)",
+			"ret != C\\.MSP_SUCCESS \\{.*?int\\(ret\\)",
+			"ret != C\\.MSP_SUCCESS \\{\\.*?int\\(ret\\)",
+			"ret != C\\.MSP_SUCCESS \\{\\.*?int\\(errorCode\\)",
+			"ret != C\\\\.MSP_SUCCESS \\{\\.*?int\\\\(errorCode\\\\)",
+			"ret != C.MSP_SUCCESS {.*?int\\\\(errorCode\\\\)",
+			"int(errorCode)",
+			"msp_status_ntf_handler",
+			"MSPRegisterNotify",
+			"string()",
+			"goodsid",
+			"trans_return_def",
+			"kernal",
+			"args_enum",
+			"trans_return_def",
+			"MSPLogin",
+			"MSPAppendData",
+			"QISEAudioWrite",
+			"trans_typ",
+			"return_type",
+			"trans_return_def",
+			"ctags",
+			"trans_returns",
+			"trans_arg_def",
+			"is_pointer",
+			"pointer_enum",
+			"TYPE_CONVERTS"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"\"\"",
+			"rets"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "parser/trans/base.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3493,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2560,
+								2560
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "xf.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11475,
+								11475
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6880.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "xf_test.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1666,
+								1666
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1740.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/hysios/Downloads/bootstrap_generator.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5979,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								669,
+								669
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 1.0,
+						"translation.y": 3060.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "string.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								238,
+								238
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "/Users/hysios/Documents/Linux_voice/samples/iat_sample/iat_sample.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6521,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2903,
+								2903
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2650.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 67.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.584845843439,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.GoSublime-main-output":
+	{
+		"height": 156.0
+	},
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 162.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 162.0
+	},
+	"output.sftp":
+	{
+		"height": 156.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 162.0
+	},
+	"pinned_build_system": "",
+	"project": "xf.sublime-project",
+	"replace":
+	{
+		"height": 114.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				".ig",
+				".gitignore"
+			],
+			[
+				"dock",
+				"Dockerfile"
+			],
+			[
+				"server.js",
+				"src/server.js"
+			],
+			[
+				"models/inde",
+				"src/models/index.js"
+			],
+			[
+				"server",
+				"src/server.js"
+			],
+			[
+				"model/index",
+				"src/models/index.js"
+			],
+			[
+				"sync.",
+				"src/sync.js"
+			],
+			[
+				"model/inde",
+				"src/models/index.js"
+			],
+			[
+				"send_test",
+				"send_test.py"
+			],
+			[
+				"seed",
+				"scripts/seed"
+			],
+			[
+				"model/ind",
+				"src/models/index.js"
+			],
+			[
+				"models/ind",
+				"src/models/index.js"
+			],
+			[
+				"app.css",
+				"src/App.css"
+			],
+			[
+				".env",
+				".env"
+			],
+			[
+				"env.",
+				"node_modules/config-chain/test/env.js"
+			],
+			[
+				".en",
+				".env"
+			],
+			[
+				"models/in",
+				"src/models/index.js"
+			],
+			[
+				"util",
+				"src/utils.js"
+			],
+			[
+				"sync",
+				"src/sync.js"
+			],
+			[
+				"electron",
+				"src/electron.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"elec",
+				"src/electron.js"
+			],
+			[
+				"model.js",
+				"node_modules/sequelize/lib/model.js"
+			],
+			[
+				"inven",
+				"src/components/Inventory.js"
+			],
+			[
+				"app.js",
+				"src/App.js"
+			],
+			[
+				"src/model",
+				"src/models/index.js"
+			],
+			[
+				"errors",
+				"src/errors.js"
+			],
+			[
+				"models/",
+				"src/models/index.js"
+			],
+			[
+				"serverjs",
+				"src/server.js"
+			],
+			[
+				"ejs",
+				"node_modules/ejs/ejs.js"
+			],
+			[
+				"models/index",
+				"src/models/index.js"
+			],
+			[
+				"models",
+				"node_modules/react-icons/io/model-s.js"
+			],
+			[
+				"salede",
+				"src/components/SaleDetail.js"
+			],
+			[
+				"model/in",
+				"node_modules/del/index.js"
+			],
+			[
+				"src/log",
+				"src/log.js"
+			],
+			[
+				"config",
+				"src/config.js"
+			],
+			[
+				"src/print",
+				"src/print/index.js"
+			],
+			[
+				"win.js",
+				"src/print/win.js"
+			],
+			[
+				"engine",
+				"src/engine.js"
+			],
+			[
+				"home",
+				"src/components/Home.js"
+			],
+			[
+				"print/inde",
+				"src/print/index.js"
+			],
+			[
+				"sale.css",
+				"src/templates/sale.css"
+			],
+			[
+				"make",
+				"Make.cmd"
+			],
+			[
+				"make.c",
+				"Make.cmd"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"pakc",
+				"node_modules/electron-compile/lib/packager-cli.js"
+			],
+			[
+				"mak",
+				"Make.cmd"
+			],
+			[
+				"phantomjs-prebuilt",
+				"node_modules/phantomjs-prebuilt/LICENSE.txt"
+			],
+			[
+				"html-pdf",
+				"node_modules/.bin/html-pdf"
+			],
+			[
+				"elect",
+				"src/electron.js"
+			],
+			[
+				"order",
+				"node_modules/lodash/orderBy.js"
+			],
+			[
+				"app.cs",
+				"src/App.css"
+			],
+			[
+				"greet",
+				"src/components/GreeterOrder.js"
+			],
+			[
+				"printer",
+				"node_modules/printer/printer.js"
+			],
+			[
+				".",
+				".gitignore"
+			],
+			[
+				"pdfium/ind",
+				"node_modules/pdfium/index.js"
+			],
+			[
+				"print/in",
+				"src/print/index.js"
+			],
+			[
+				"man",
+				"src/print/manager.js"
+			],
+			[
+				"greeter",
+				"src/components/GreeterOrder.js"
+			],
+			[
+				"elecron",
+				"src/electron.js"
+			],
+			[
+				"engin",
+				"src/engine.js"
+			],
+			[
+				"datat",
+				"src/components/DataTabler.js"
+			],
+			[
+				"elecon",
+				"node_modules/babel-preset-react-app/node_modules/babel-preset-env/node_modules/babel-runtime/helpers/possibleConstructorReturn.js"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"react-transition-group/in",
+				"node_modules/react-transition-group/index.js"
+			],
+			[
+				"node_print",
+				"node_modules/printer/src/node_printer.hpp"
+			],
+			[
+				"index",
+				"src/index.js"
+			],
+			[
+				"message",
+				"src/queue/message.js"
+			],
+			[
+				"index.js",
+				"src/index.js"
+			],
+			[
+				"const",
+				"src/constants.js"
+			],
+			[
+				"pur",
+				"src/components/Purchase.js"
+			],
+			[
+				"sale",
+				"src/components/Sale.js"
+			],
+			[
+				"produ",
+				"src/components/Product.js"
+			],
+			[
+				"purde",
+				"src/components/PurchaseDetail.js"
+			],
+			[
+				"server.",
+				"src/server.js"
+			],
+			[
+				"configs",
+				"src/configSave.js"
+			],
+			[
+				"setting",
+				"src/components/Settings.js"
+			],
+			[
+				"settin",
+				"src/components/Settings.js"
+			],
+			[
+				"react-script/",
+				"node_modules/react-scripts/package.json"
+			],
+			[
+				"react-s",
+				"node_modules/.bin/react-scripts"
+			],
+			[
+				"electron.js",
+				"src/electron.js"
+			],
+			[
+				"electr",
+				"node_modules/.bin/electron"
+			],
+			[
+				"upgra",
+				"src/components/Upgrade.js"
+			],
+			[
+				"modeindex",
+				"src/models/index.js"
+			],
+			[
+				"numb",
+				"src/components/Number.js"
+			],
+			[
+				"app",
+				"src/App.js"
+			],
+			[
+				"appp",
+				"node_modules/electron-builder/templates/nsis/include/extractAppPackage.nsh"
+			],
+			[
+				"ele",
+				"src/electron.js"
+			],
+			[
+				"app.c",
+				"src/App.css"
+			],
+			[
+				"con",
+				"src/config.js"
+			],
+			[
+				"sqs",
+				"src/sqs.js"
+			],
+			[
+				"command",
+				"src/queue/commandManager.js"
+			],
+			[
+				"confi",
+				"src/config.js"
+			],
+			[
+				"datab",
+				"src/components/DataTabler.js"
+			],
+			[
+				"product",
+				"src/components/Product.js"
+			],
+			[
+				"produt",
+				"src/components/Product.js"
+			],
+			[
+				"sync_t",
+				"src/sync_test.js"
+			],
+			[
+				"layou",
+				"src/components/Layout.js"
+			],
+			[
+				"nav",
+				"node_modules/eslint/lib/rules/newline-after-var.js"
+			],
+			[
+				".gi",
+				".gitignore"
+			],
+			[
+				"test.js",
+				"test.js"
+			],
+			[
+				".git",
+				".gitignore"
+			],
+			[
+				"serv",
+				"src/server.js"
+			],
+			[
+				"ser",
+				"src/server.js"
+			],
+			[
+				"brower-dr",
+				"node_modules/wechaty/dist/src/puppet-web/browser-driver.js"
+			],
+			[
+				"work",
+				"lib/worker.js"
+			],
+			[
+				"worker",
+				"lib/worker.js"
+			],
+			[
+				"wo",
+				"lib/worker.js"
+			],
+			[
+				"wirj",
+				"node_modules/readable-stream/writable.js"
+			],
+			[
+				"task",
+				"task.js"
+			],
+			[
+				"login",
+				"src/components/LoginDialog.js"
+			],
+			[
+				"log",
+				"node_modules/worker-loader/log.txt"
+			],
+			[
+				"envir",
+				"editor/src/environment.js"
+			],
+			[
+				".g",
+				".gitignore"
+			],
+			[
+				"conf",
+				"config.go"
+			],
+			[
+				"ma",
+				"Makefile"
+			],
+			[
+				"mail",
+				"vendor/github.com/mattn/go-isatty/isatty_linux.go"
+			],
+			[
+				"index.h",
+				"web/includes/index.html"
+			],
+			[
+				"porfile",
+				"web/layouts/profile.html"
+			],
+			[
+				"render",
+				"admin/render.go"
+			],
+			[
+				"respn",
+				"oauth/response.go"
+			],
+			[
+				"respon",
+				"oauth/response.go"
+			],
+			[
+				"oauth",
+				"models/oauth.go"
+			],
+			[
+				"uti",
+				"utils.go"
+			],
+			[
+				"midd",
+				"server/middleware.go"
+			],
+			[
+				"server.go",
+				"server/server.go"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 188.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
