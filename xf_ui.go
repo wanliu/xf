@@ -9,9 +9,7 @@ int callEventListener(Event *evt); // Forward declaration.
 */
 import "C"
 import (
-	"bytes"
-	"encoding/json"
-	"log"
+	"sync"
 	"unsafe"
 )
 
@@ -21,7 +19,6 @@ type Event struct {
 
 type Listener struct {
 	listener *C.Listener
-	agent    *Agent
 }
 
 type Agent struct {
@@ -42,138 +39,42 @@ type EventHandler func(evt *Event) error
 type Map map[string]interface{}
 
 //export goEventListner
-func goEventListner(v *C.Event) int {
-	var evt = &Event{
-		event: v,
-	}
-
-	// handler := C.getEventHandler(v)
-	// t := reflect.TypeOf(Listener{})
-	// vv := reflect.NewAt(t, handler)
-	// log.Printf("event handler %v %s", vv, vv.Type().String())
-	// listener, ok := vv.Interface().(*Listener)
-	// if !ok {
-	// 	log.Printf("listener convert failed")
-	// }
-
-	// log.Printf("listener agent %# v", listener)
-	// if listener.agent != nil {
-	// 	listener.agent.Events <- evt
-	// }
-
-	switch evt.EventType() {
-	case EventState:
-		state := (StateType)(evt.Arg1())
-		switch state {
-		case StateIdle:
-			log.Printf("EventState: %s\n", "IDLE")
-		case StateReady:
-			log.Printf("EventState: %s\n", "READY")
-		case StateWorking:
-			log.Printf("EventState: %s\n", "WORKING")
-		default:
-			log.Printf("InvalidState %d", state)
-		}
-	case EventVad:
-		vad := (VadType)(evt.Arg1())
-
-		switch vad {
-		case VadBos:
-			log.Printf("VadState: %s\n", "检测到开始")
-		case VadEos:
-			log.Printf("VadState: %s\n", "检测到结束")
-		case VadVol:
-			//
-		}
-	case EventResult:
-		info := evt.Info()
-		var (
-			result AIUIResult
-			data   AIUIResultData
-		)
-
-		if err := json.Unmarshal([]byte(info), &result); err != nil {
-			log.Printf("解析 Result 错误: %s", err)
-		}
-
-		data = result.Data[0]
-
-		if data.Params.Sub == "nlp" {
-			contentId := data.Content[0].CNT_ID
-			if len(contentId) == 0 {
-				log.Printf("missing contentId")
-				return 0
-			}
-
-			buffer := evt.Data().GetBinary(contentId)
-			var out bytes.Buffer
-			var buff = buffer.Data()
-			buff = buff[:len(buff)-1]
-			if err := json.Indent(&out, buff, "", "  "); err != nil {
-				log.Printf("格式化内容错误: %s", err)
-			}
-
-			log.Printf("output: %s", out.String())
-		}
-	case EventError:
-		log.Printf("Error Code : %d", evt.Arg1())
-	default:
-		log.Printf("消息 EventType: %d", evt.EventType())
-	}
-	return 0
+func goEventListner(idx C.int, v *C.Event) {
+	fn := lookup(int(idx))
+	fn(&Event{event: v})
 }
 
-func CreateListener(handle func(evt *Event)) *Listener {
+func NewListener(handle func(*Event)) *Listener {
 	var listener Listener
-	li := C.createListener(unsafe.Pointer(&listener), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
+	i := register(handle)
+	li := C.createListener(C.int(i), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
 	listener.listener = li
 
 	return &listener
 }
 
-func CreateAgent(params string, listener *Listener) *Agent {
-	agent := C.createAgent(C.CString(params), listener.listener)
-	var a = Agent{
+func NewAgent(params string, li *Listener) *Agent {
+	agent := C.createAgent(C.CString(params), li.listener)
+	return &Agent{
 		agent:  agent,
 		Events: make(chan *Event, 0),
 	}
-	listener.agent = &a
-	return &a
-}
-
-func NewListener() *Listener {
-	var listener Listener
-	li := C.createListener(unsafe.Pointer(&listener), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
-	listener.listener = li
-
-	return &listener
-}
-
-func NewAgent(params string) *Agent {
-	listener := NewListener()
-	agent := C.createAgent(C.CString(params), listener.listener)
-	var a = Agent{
-		agent:  agent,
-		Events: make(chan *Event, 0),
-	}
-	listener.agent = &a
-	return &a
 }
 
 func (agt *Agent) Start() {
-	msg := buildMessage(CmdStart)
+	msg := NewMessage(CmdStart)
 	agt.SendMessage(msg)
 	msg.Destroy()
 }
 
 func (agt *Agent) Stop() {
-	msg := buildMessage(CmdStop)
+	msg := NewMessage(CmdStop)
 	agt.SendMessage(msg)
 	msg.Destroy()
 }
 
 func (agt *Agent) Weakup() {
-	msg := buildMessage(CmdWakeup)
+	msg := NewMessage(CmdWakeup)
 	agt.SendMessage(msg)
 	msg.Destroy()
 }
@@ -183,21 +84,21 @@ func (agt *Agent) SendMessage(msg *Message) error {
 	return nil
 }
 
-func buildMessage(msgType MsgType) *Message {
+func NewMessage(msgType MsgType) *Message {
 
 	return &Message{
 		message: C.buildMessage(C.int(msgType), 0, 0, C.CString(""), nil, 0),
 	}
 }
 
-func buildMessageText(msgType MsgType, text string) *Message {
+func NewMessageText(msgType MsgType, text string) *Message {
 	data := []byte(text)
 	return &Message{
 		message: C.buildMessage(C.int(msgType), 0, 0, C.CString("data_type=text"), C.CBytes(data), C.int(len(data))),
 	}
 }
 
-func buildMessageBytes(msgType MsgType, params string, buf []byte) *Message {
+func NewMessageBytes(msgType MsgType, params string, buf []byte) *Message {
 	return &Message{
 		message: C.buildMessage(C.int(msgType), 0, 0, C.CString(params), C.CBytes(buf), C.int(len(buf))),
 	}
@@ -296,6 +197,29 @@ func (buf *Buffer) Data() []byte {
 	return C.GoBytes(C.BufferGetData(buf.buffer), size)
 }
 
-func RegisterListener() {
+var mu sync.Mutex
+var index int
+var fns = make(map[int]func(*Event))
 
+func register(fn func(*Event)) int {
+	mu.Lock()
+	defer mu.Unlock()
+	index++
+	for fns[index] != nil {
+		index++
+	}
+	fns[index] = fn
+	return index
+}
+
+func lookup(i int) func(*Event) {
+	mu.Lock()
+	defer mu.Unlock()
+	return fns[i]
+}
+
+func unregister(i int) {
+	mu.Lock()
+	defer mu.Unlock()
+	delete(fns, i)
 }

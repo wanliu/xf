@@ -8,8 +8,6 @@ import (
 	"os"
 	"testing"
 	"time"
-
-	"github.com/kr/pretty"
 )
 
 func receiveEvent(evt *Event) {
@@ -98,29 +96,22 @@ func TestXFUI(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	agent := NewAgent(string(buf))
+	listener := NewListener(receiveEvent)
+
+	agent := NewAgent(string(buf), listener)
 	t.Logf("Agent %#v", agent)
 	// agent.Start()
 	time.Sleep(time.Second)
 	agent.Weakup()
 
-	msg := buildMessageText(CmdWrite, "你好")
+	msg := NewMessageText(CmdWrite, "你好")
 	agent.SendMessage(msg)
 	msg.Destroy()
-
-	for evt := range agent.Events {
-		log.Printf("event: %# v", pretty.Formatter(evt))
-		log.Printf("eventType: %# v", evt.EventType())
-		// receiveEvent(evt)
-	}
-
-	// time.Sleep(3 * time.Second)
+	time.Sleep(3 * time.Second)
 }
 
 func TestXFUI_Wav(t *testing.T) {
-	li := CreateListener(func(evt *Event) {
-
-	})
+	li := NewListener(receiveEvent)
 
 	cfile, err := os.Open("aiui.cfg") // For read access.
 	if err != nil {
@@ -146,7 +137,7 @@ func TestXFUI_Wav(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	agent := CreateAgent(string(buf), li)
+	agent := NewAgent(string(buf), li)
 	time.Sleep(time.Second)
 	agent.Weakup()
 
@@ -157,13 +148,13 @@ func TestXFUI_Wav(t *testing.T) {
 
 	var pcm = make([]byte, 1279)
 	for _, err := file.Read(pcm); err != io.EOF; _, err = file.Read(pcm) {
-		msg := buildMessageBytes(CmdWrite, "data_type=audio,sample_rate=16000", pcm)
+		msg := NewMessageBytes(CmdWrite, "data_type=audio,sample_rate=16000", pcm)
 		agent.SendMessage(msg)
 		msg.Destroy()
 		time.Sleep(10 * time.Millisecond)
 	}
 
-	msg := buildMessageBytes(CmdStopWrite, "data_type=audio,sample_rate=16000", nil)
+	msg := NewMessageBytes(CmdStopWrite, "data_type=audio,sample_rate=16000", nil)
 	agent.SendMessage(msg)
 	msg.Destroy()
 	time.Sleep(3 * time.Second)

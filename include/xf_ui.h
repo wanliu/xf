@@ -10,10 +10,8 @@ typedef struct _Message Message;
 typedef struct _Buffer MessageBuffer;
 typedef struct _DataBundle DataBundle;
 
-typedef int (*CallbackFcn)(const Event *evt);
-
-Listener* createListener(const void *listener, void (*fcn)(const Event*));
-const void* getEventHandler(Event *evt);
+typedef int (*CallbackFcn)(int idx, const Event *evt);
+Listener* createListener(int index, void (*fcn)(int idx, const Event*));
 Agent* createAgent(const char *params, const Listener* listener);
 void sendMessage(const Agent* agent, const Message* msg);
 Message* buildMessage(int msgType, int arg0, int arg1, const char* params, const void *buf, const int bufLength);

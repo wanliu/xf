@@ -5,10 +5,10 @@ package xf
 #include "xf_ui.h"
 
 // The gateway function
-void callEventListener(Event *evt)
+void callEventListener(int i, Event *evt)
 {
-	int goEventListner(Event*);
-	goEventListner(evt);
+	int goEventListner(int, Event*);
+	goEventListner(i, evt);
 }
 
 */
