@@ -19,6 +19,52 @@ type Scene struct {
 	UserId string `json:"userid"`
 }
 
+type IATScene struct {
+	AUF   string `json:"auf"`
+	AUE   string `json:"aue"`
+	Scene string `json:"scene"`
+}
+
+type VoiceScene struct {
+	AUF    string `json:"auf"`
+	AUE    string `json:"aue"`
+	Scene  string `json:"scene"`
+	UserId string `json:"userid"`
+}
+
+type WebClient struct {
+	AppId   string
+	AppKey  string
+	apiHost string
+	client  *http.Client
+}
+
+type WebSession struct {
+	Scene       string
+	UserId      string
+	client      *WebClient
+	form        url.Values
+	sampleRate  string
+	audioFormat string
+	curType     ParamType
+}
+
+type ApiURL string
+
+const (
+	ApiText  = "v1/aiui/v1/text_semantic"
+	ApiIAT   = "v1/aiui/v1/iat"
+	ApiVoice = "v1/aiui/v1/voice_semantic"
+)
+
+type ParamType int
+
+const (
+	TextParam ParamType = iota
+	IATParam
+	VoiceParam
+)
+
 func btoa(buf []byte) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
@@ -73,20 +119,6 @@ func Query(appId, apikey, scene, user_id, text string) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-type WebClient struct {
-	AppId   string
-	AppKey  string
-	apiHost string
-	client  *http.Client
-}
-
-type WebSession struct {
-	Scene  string
-	UserId string
-	client *WebClient
-	form   url.Values
-}
-
 func NewWebClient(appid, appkey string) *WebClient {
 	return &WebClient{
 		AppId:   appid,
@@ -104,18 +136,12 @@ func (cli *WebClient) NewSession(scene, user_id string) *WebSession {
 	}
 }
 
-type ApiURL string
-
-const (
-	ApiText   = "v1/aiui/v1/text_semantic"
-	ApiSpeech = "v1/aiui/v1/iat"
-)
-
 func (sess *WebSession) PostText(text string) ([]byte, error) {
+	sess.setParamType(TextParam)
 	sess.form = url.Values{}
-	sess.form.Add("text", btoa([]byte(text)))
+	sess.form.Set("text", btoa([]byte(text)))
 
-	req, err := sess.NewReq(sess.apiUrl(ApiText), strings.NewReader(sess.XBody()))
+	req, err := sess.NewReq(sess.apiUrl(), strings.NewReader(sess.XBody()))
 
 	if err != nil {
 		return nil, err
@@ -125,14 +151,80 @@ func (sess *WebSession) PostText(text string) ([]byte, error) {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
 	req.Header.Set("X-Appid", sess.client.AppId)
 	req.Header.Set("X-CurTime", cur_time)
-	req.Header.Set("X-Param", string(sess.XParam()))
+	req.Header.Set("X-Param", sess.XParam())
 	req.Header.Set("X-CheckSum", sess.XCheckSum(cur_time))
 	log.Printf("X-Appid: %s\n", sess.client.AppId)
 	log.Printf("X-CurTime: %s\n", cur_time)
 	log.Printf("X-Param: %s\n", sess.XParam())
-	log.Printf("Body: %s\n", sess.XBody())
+	// log.Printf("Body: %s\n", sess.XBody())
 	log.Printf("X-CheckSum: %s\n", sess.XCheckSum(cur_time))
-	log.Printf("API URL: %s", sess.apiUrl(ApiText))
+	log.Printf("API URL: %s", sess.apiUrl())
+	resp, err := sess.client.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	return ioutil.ReadAll(resp.Body)
+}
+
+func (sess *WebSession) PostIAT(buf []byte) ([]byte, error) {
+	sess.setParamType(IATParam)
+
+	sess.form = url.Values{}
+	sess.form.Set("data", btoa(buf))
+
+	req, err := sess.NewReq(sess.apiUrl(), strings.NewReader(sess.XBody()))
+
+	if err != nil {
+		return nil, err
+	}
+
+	cur_time := sess.XCurTime()
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
+	req.Header.Set("X-Appid", sess.client.AppId)
+	req.Header.Set("X-CurTime", cur_time)
+	req.Header.Set("X-Param", sess.XParam())
+	req.Header.Set("X-CheckSum", sess.XCheckSum(cur_time))
+	log.Printf("X-Appid: %s\n", sess.client.AppId)
+	log.Printf("X-CurTime: %s\n", cur_time)
+	log.Printf("X-Param: %s\n", sess.XParam())
+	// log.Printf("Body: %s\n", sess.XBody())
+	log.Printf("X-CheckSum: %s\n", sess.XCheckSum(cur_time))
+	log.Printf("API URL: %s", sess.apiUrl())
+	resp, err := sess.client.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	return ioutil.ReadAll(resp.Body)
+}
+
+func (sess *WebSession) PostVoice(buf []byte) ([]byte, error) {
+	sess.setParamType(VoiceParam)
+
+	sess.form = url.Values{}
+	sess.form.Set("data", btoa(buf))
+
+	req, err := sess.NewReq(sess.apiUrl(), strings.NewReader(sess.XBody()))
+
+	if err != nil {
+		return nil, err
+	}
+
+	cur_time := sess.XCurTime()
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
+	req.Header.Set("X-Appid", sess.client.AppId)
+	req.Header.Set("X-CurTime", cur_time)
+	req.Header.Set("X-Param", sess.XParam())
+	req.Header.Set("X-CheckSum", sess.XCheckSum(cur_time))
+	log.Printf("X-Appid: %s\n", sess.client.AppId)
+	log.Printf("X-CurTime: %s\n", cur_time)
+	log.Printf("X-Param: %s\n", sess.XParam())
+	// log.Printf("Body: %s\n", sess.XBody())
+	log.Printf("X-CheckSum: %s\n", sess.XCheckSum(cur_time))
+	log.Printf("API URL: %s", sess.apiUrl())
 	resp, err := sess.client.client.Do(req)
 	if err != nil {
 		return nil, err
@@ -146,7 +238,16 @@ func (sess *WebSession) NewReq(path string, form io.Reader) (*http.Request, erro
 	return http.NewRequest("POST", path, form)
 }
 
-func (sess *WebSession) apiUrl(api ApiURL) string {
+func (sess *WebSession) apiUrl() string {
+	var api string
+	switch sess.curType {
+	case TextParam:
+		api = ApiText
+	case IATParam:
+		api = ApiIAT
+	case VoiceParam:
+		api = ApiVoice
+	}
 	return fmt.Sprintf("%s%s", sess.client.apiHost, api)
 }
 
@@ -156,7 +257,13 @@ func (sess *WebSession) XCurTime() string {
 }
 
 func (sess *WebSession) XBody() string {
-	return sess.form.Encode()
+	switch sess.curType {
+	case TextParam:
+		return fmt.Sprintf("text=%s", sess.form.Get("text"))
+	case IATParam, VoiceParam:
+		return fmt.Sprintf("data=%s", sess.form.Get("data"))
+	}
+	return ""
 }
 
 func (sess *WebSession) XCheckSum(time string) string {
@@ -167,12 +274,41 @@ func (sess *WebSession) XCheckSum(time string) string {
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
 
+func (sess *WebSession) setParamType(pt ParamType) {
+	sess.curType = pt
+}
+
+func (sess *WebSession) SetAudioFormat(sampleRate, format string) {
+	sess.audioFormat = format
+	sess.sampleRate = sampleRate
+}
+
 func (sess *WebSession) XParam() string {
-	p := Scene{
-		Scene:  sess.Scene,
-		UserId: sess.UserId,
+	var p interface{}
+	// log.Printf("curType: %d", sess.curType)
+	switch sess.curType {
+	case TextParam:
+		p = Scene{
+			Scene:  sess.Scene,
+			UserId: sess.UserId,
+		}
+	case IATParam:
+		p = IATScene{
+			AUF:   sess.sampleRate,
+			AUE:   sess.audioFormat,
+			Scene: sess.Scene,
+		}
+	case VoiceParam:
+		p = VoiceScene{
+			AUF:    sess.sampleRate,
+			AUE:    sess.audioFormat,
+			Scene:  sess.Scene,
+			UserId: sess.UserId,
+		}
 	}
+	// log.Printf("params %#v", p)
 
 	buf, _ := json.Marshal(&p)
+	// log.Printf("params json: %s", buf)
 	return btoa(buf)
 }
