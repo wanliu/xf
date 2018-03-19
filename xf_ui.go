@@ -9,6 +9,7 @@ int callEventListener(Event *evt); // Forward declaration.
 */
 import "C"
 import (
+	"log"
 	"sync"
 	"unsafe"
 )
@@ -41,6 +42,7 @@ type Map map[string]interface{}
 //export goEventListner
 func goEventListner(idx C.int, v *C.Event) {
 	fn := lookup(int(idx))
+	log.Printf("idx: %d", idx)
 	fn(&Event{event: v})
 }
 
