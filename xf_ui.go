@@ -73,6 +73,12 @@ func (agt *Agent) Stop() {
 	msg.Destroy()
 }
 
+func (agt *Agent) Reset() {
+	msg := NewMessage(CmdReset)
+	agt.SendMessage(msg)
+	msg.Destroy()
+}
+
 func (agt *Agent) Weakup() {
 	msg := NewMessage(CmdWakeup)
 	agt.SendMessage(msg)
