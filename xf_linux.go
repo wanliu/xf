@@ -487,8 +487,9 @@ func QIVWRegisterNotify(sessionID string, userData []byte) error {
 
 //export weakupCallback
 func weakupCallback(sessionID unsafe.Pointer, msg, param1, param2 C.int, info, userData unsafe.Pointer) int {
-	sessId := C.GoString(sessionID)
+	sessId := C.GoString((*C.char)(sessionID))
 	log.Printf("sessionID %s 唤醒", sessId)
+	return 0
 }
 
 // const char* MSPAPI QIVWSessionBegin(const char *grammarList, const char *params, int *errorCode);
