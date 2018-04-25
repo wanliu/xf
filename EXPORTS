@@ -2,6 +2,7 @@ QISEGetResult
 MSPUploadData
 QTTSSessionBegin
 QISVSessionBegin
+QIVWRegisterNotify
 QISRGetBinaryResult
 QTTSTextPut
 QISRSetParam
@@ -19,10 +20,12 @@ QISRGetParam
 MSPRegisterNotify
 QISRSessionBegin
 QISETextPut
+QIVWResMerge
 QHCRDataWrite
 MSPGetVersion
 QTTSSetParam
 QISVGetParam
+QIVWAudioWrite
 MSPDownloadData
 QHCRSessionBegin
 QISRAudioWrite
@@ -30,6 +33,7 @@ QISEGetParam
 QISEAudioWrite
 MSPSearch
 QISVDownLoadPwd
+QIVWSessionEnd
 QHCRSessionEnd
 QTTSGetParam
 MSPSetParam
@@ -38,6 +42,7 @@ QISESessionEnd
 QISRBuildGrammar
 QISVAudioWrite
 QISVQueDelModel
+QIVWSessionBegin
 QISVGetResult
 QISRSessionEnd
 QTTSSessionEnd

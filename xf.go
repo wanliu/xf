@@ -5,10 +5,13 @@ package xf
 #cgo LDFLAGS:-L./libs/x64 -lmsc -lrt -ldl -lpthread
 #include "xf.h"
 
+extern ivw_ntf_handler ivwhandler;
+
 */
 import "C"
 import (
 	"fmt"
+	"log"
 	"unsafe"
 )
 
@@ -440,6 +443,73 @@ func QTTSTextPut(sessionID string, textString string, params string) error {
 	ret := C.QTTSTextPut(C.CString(sessionID), C.CString(textString), C.uint(textLen), C.CString(params))
 	if ret != C.MSP_SUCCESS {
 		return fmt.Errorf("QTTSTextPut failed, error %d", int(ret))
+	}
+
+	return nil
+}
+
+// int MSPAPI QIVWAudioWrite(const char *sessionID, const void *audioData, unsigned int audioLen, int audioStatus);
+func QIVWAudioWrite(sessionID string, audioData []byte, audioStatus int) error {
+	var audioLen = len(audioData)
+
+	ret := C.QIVWAudioWrite(C.CString(sessionID), C.CBytes(audioData), C.uint(audioLen), C.int(audioStatus))
+	if ret != C.MSP_SUCCESS {
+		return fmt.Errorf("QIVWAudioWrite failed, error %d", int(ret))
+	}
+
+	return nil
+}
+
+// int MSPAPI QIVWRegisterNotify(const char *sessionID, ivw_ntf_handler msgProcCb, void *userData);
+func QIVWRegisterNotify(sessionID string, userData []byte) error {
+	cb := C.ivwhandler
+
+	ret := C.QIVWRegisterNotify(C.CString(sessionID), cb, unsafe.Pointer(&userData[0]))
+	if ret != C.MSP_SUCCESS {
+		return fmt.Errorf("QIVWRegisterNotify failed, error %d", int(ret))
+	}
+
+	return nil
+}
+
+// int MSPAPI QIVWResMerge(const char *srcPath, const char *destPath, const char *params);
+// func QIVWResMerge(srcPath string, destPath string, params string) int {
+
+// 	ret := C.QIVWResMerge(C.CString(srcPath), C.CString(destPath), C.CString(params))
+// 	if ret != C.MSP_SUCCESS {
+// 		return
+// 	}
+
+// 	return C.QIVWResMerge(C.CString(srcPath), C.CString(destPath), C.CString(params))
+// }
+
+// typedef int( *ivw_ntf_handler)( const char *sessionID, int msg, int param1, int param2, const void *info, void *userData );
+
+//export weakupCallback
+func weakupCallback(sessionID unsafe.Pointer, msg, param1, param2 C.int, info, userData unsafe.Pointer) int {
+	sessId := C.GoString(sessionID)
+	log.Printf("sessionID %s 唤醒", sessId)
+}
+
+// const char* MSPAPI QIVWSessionBegin(const char *grammarList, const char *params, int *errorCode);
+func QIVWSessionBegin(grammarList string, params string) (string, error) {
+	var errorCode C.int
+
+	ret := C.QIVWSessionBegin(C.CString(grammarList), C.CString(params), &errorCode)
+	if errorCode != C.MSP_SUCCESS {
+		return "", fmt.Errorf("QIVWSessionBegin failed, error %d", int(errorCode))
+
+	}
+
+	return C.GoString(ret), nil
+}
+
+// int MSPAPI QIVWSessionEnd(const char *sessionID, const char *hints);
+func QIVWSessionEnd(sessionID string, hints string) error {
+
+	ret := C.QIVWSessionEnd(C.CString(sessionID), C.CString(hints))
+	if ret != C.MSP_SUCCESS {
+		return fmt.Errorf("QIVWSessionEnd failed, error %d", int(ret))
 	}
 
 	return nil

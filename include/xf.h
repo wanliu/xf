@@ -7,5 +7,6 @@
 #include "qisr.h"
 #include "qise.h"
 #include "qtts.h"
+#include "qivw.h"
 #include "msp_cmn.h"
 #include "msp_errors.h"
