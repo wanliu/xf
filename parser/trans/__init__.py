@@ -6,4 +6,6 @@ from pointer2ret import *
 from pretty import *
 from ret import *
 from status import *
+from c_func import *
+from h_func import *
 from type import *

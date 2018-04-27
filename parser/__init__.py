@@ -17,10 +17,26 @@ def trans_body(return_type, func, args, source=None):
     # wrapper.wrap(ReturnTransform)
 
     # if func not in ERROR_RETURN_EXCLUDES:
-    # 	wrapper.wrap(ErrorTransform)
+    #   wrapper.wrap(ErrorTransform)
 
     # if func in POINTER_RETURN_ARG:
-    # 	wrapper.wrap(PointerTransform)
+    #   wrapper.wrap(PointerTransform)
+
+    return wrapper.gen()
+
+
+def trans_c_body(return_type, func, args, source=None):
+    wrapper = Wrapper(return_type, func, args, source)
+
+    wrapper.wrap(CTransform)
+
+    return wrapper.gen()
+
+
+def trans_h_body(return_type, func, args, source=None):
+    wrapper = Wrapper(return_type, func, args, source)
+
+    wrapper.wrap(HTransform)
 
     return wrapper.gen()
 

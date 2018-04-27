@@ -7,9 +7,7 @@ from ..constants import *
 from ..arg import *
 from ..type import *
 
-
-class Transform(object):
-
+class CTransform(object):
     def before(self):
         return {
             "before": "",
@@ -22,10 +20,10 @@ class Transform(object):
 
     def header(self):
         return {
-            "func": ' ' + self.func,
+            "func": ' xf' + self.func,
             "struct": "",
             "args": self.trans_define_args(self.args),
-            "return_def": ' ' + self.trans_return_def(self.rets),
+            "return_def": 'XUNFEI_API ' + self.trans_return_def(self.rets),
         }
 
     def kernal(self):
@@ -33,7 +31,7 @@ class Transform(object):
         rets = self.rets
         args = self.args
 
-        default_return = "return C.{func}({pass_args})"
+        default_return = "return {func}({pass_args})"
         ctxt = {
             "func": func,
             "pass_args": self.trans_arguments(args),
@@ -73,7 +71,7 @@ class Transform(object):
     def render(self, ctxt, **kwargs):
         tpl = """
         // {source}
-        func{struct}{func}({args}){return_def} {{
+        {return_def} {struct}{func}({args}) {{
             {var_initial}
             {before}
             {kernal}
@@ -100,13 +98,13 @@ class Transform(object):
         return typ.strip()[-1] == '*'
 
     def trans_arg_def(self, arg):
-        return arg.define()
+        return "%s %s" % (arg.source, arg.name)
 
     def trans_typ(self, typ):
         if typ is None:
             return "nil"
 
-        return typ.define()
+        return typ.source
 
     def trans_arg_call(self, arg):
         log('arg type:', type(arg))
@@ -146,5 +144,4 @@ class Transform(object):
 
     def trans_return(self, returns):
         return map(self.trans_arg_call, self.return_enum(returns))
-
 
