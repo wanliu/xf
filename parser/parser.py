@@ -34,14 +34,17 @@ def split_star(arg):
     return ws
 
 
-def trans_c(arg):
+def trans_c(arg, ignore=True):
     ws = split_star(arg)
     # ws = re.split(r'[\s|\*]', arg)
     for i in xrange(len(ws) - 1, 0, -1):
         key = ' '.join(ws[:i])
-        if TYPES.get(key, None) is None:
-            continue
-        typ = TYPES[key]
+        if ignore:
+            if TYPES.get(key, None) is None:
+                continue
+            typ = TYPES[key]
+        else:
+            typ = key
 
         if type(typ) is FunctionType:
             return Arg(ws[-1], typ(), key)
@@ -51,14 +54,17 @@ def trans_c(arg):
     return None
 
 
-def trans_type(arg):
+def trans_type(arg, ignore=True):
     ws = split_star(arg)
     for i in xrange(len(ws) - 1, -1, -1):
         key = ' '.join(ws[:i + 1])
 
-        if TYPES.get(key, None) is None:
-            continue
-        typ = TYPES[key]
+        if ignore:
+            if TYPES.get(key, None) is None:
+                continue
+            typ = TYPES[key]
+        else:
+            typ = key
 
         if type(typ) is FunctionType:
             return Type(typ(), key)
@@ -72,9 +78,12 @@ ConstFuncDef = '(const\s+\w+\*?)?\s+(\*?\w+)\((.*?)\)'
 fndefs = [ ("match", ConstFuncDef), ("search", FuncDef) ]
 
 
-def parse(line):
+def parse(line, ignore=True):
     line = line.replace("MSPAPI ", "")
     # print(line)
+    def _trans_c(arg):
+        return trans_c(arg, ignore)
+
     for mth, fndef in fndefs:
         if mth == "match":
             m = re.match(fndef, line)
@@ -92,9 +101,9 @@ def parse(line):
                 func = func[1:]
                 return_type = return_type + '*'
 
-            tr_args = map(trans_c, args)
+            tr_args = map(_trans_c, args)
             tr_args = [x for x in tr_args if x]
-            ret = trans_type(return_type)
+            ret = trans_type(return_type, ignore)
             # m = re.search('\s+(\w+)\(', line)
             # m.group(1)
 

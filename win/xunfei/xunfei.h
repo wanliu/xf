@@ -30,11 +30,11 @@ extern "C" {
         
 
 
-        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData);
+        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, NLPSearchCB callback, void * userData);
         
 
 
-        XUNFEI_API int  xfMSPRegisterNotify(void * userData);
+        XUNFEI_API int  xfMSPRegisterNotify(msp_status_ntf_handler statusCb, void * userData);
         
 
 
@@ -82,7 +82,7 @@ extern "C" {
         
 
 
-        XUNFEI_API int  xfQISRBuildGrammar(const char * grammarType, const char * grammarContent, unsigned int grammarLength, const char * params, void * userData);
+        XUNFEI_API int  xfQISRBuildGrammar(const char * grammarType, const char * grammarContent, unsigned int grammarLength, const char * params, GrammarCallBack callback, void * userData);
         
 
 
@@ -110,7 +110,7 @@ extern "C" {
         
 
 
-        XUNFEI_API int  xfQISRUpdateLexicon(const char * lexiconName, const char * lexiconContent, unsigned int lexiconLength, const char * params, void * userData);
+        XUNFEI_API int  xfQISRUpdateLexicon(const char * lexiconName, const char * lexiconContent, unsigned int lexiconLength, const char * params, LexiconCallBack callback, void * userData);
         
 
 
@@ -118,7 +118,7 @@ extern "C" {
         
 
 
-        XUNFEI_API int  xfQIVWRegisterNotify(const char * sessionID, void * userData);
+        XUNFEI_API int  xfQIVWRegisterNotify(const char * sessionID, ivw_ntf_handler msgProcCb, void * userData);
         
 
 

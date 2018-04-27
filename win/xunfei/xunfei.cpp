@@ -76,25 +76,25 @@
 
 
         // const char* MSPAPI MSPNlpSearch(const char* params, const char* text, unsigned int textLen, int *errorCode, NLPSearchCB callback, void *userData);
-        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData) {
+        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, NLPSearchCB callback, void * userData) {
             
             
             
             
             
-            return MSPNlpSearch(params, text, textLen, errorCode, userData);
+            return MSPNlpSearch(params, text, textLen, errorCode, callback, userData);
         }
         
 
 
         // int MSPAPI MSPRegisterNotify( msp_status_ntf_handler statusCb, void *userData );
-        XUNFEI_API int  xfMSPRegisterNotify(void * userData) {
+        XUNFEI_API int  xfMSPRegisterNotify(msp_status_ntf_handler statusCb, void * userData) {
             
             
             
             
             
-            return MSPRegisterNotify(userData);
+            return MSPRegisterNotify(statusCb, userData);
         }
         
 
@@ -232,13 +232,13 @@
 
 
         // int MSPAPI QISRBuildGrammar(const char *grammarType, const char *grammarContent, unsigned int grammarLength, const char *params, GrammarCallBack callback, void *userData);
-        XUNFEI_API int  xfQISRBuildGrammar(const char * grammarType, const char * grammarContent, unsigned int grammarLength, const char * params, void * userData) {
+        XUNFEI_API int  xfQISRBuildGrammar(const char * grammarType, const char * grammarContent, unsigned int grammarLength, const char * params, GrammarCallBack callback, void * userData) {
             
             
             
             
             
-            return QISRBuildGrammar(grammarType, grammarContent, grammarLength, params, userData);
+            return QISRBuildGrammar(grammarType, grammarContent, grammarLength, params, callback, userData);
         }
         
 
@@ -316,13 +316,13 @@
 
 
         // int MSPAPI QISRUpdateLexicon(const char *lexiconName, const char *lexiconContent, unsigned int lexiconLength, const char *params, LexiconCallBack callback, void *userData);
-        XUNFEI_API int  xfQISRUpdateLexicon(const char * lexiconName, const char * lexiconContent, unsigned int lexiconLength, const char * params, void * userData) {
+        XUNFEI_API int  xfQISRUpdateLexicon(const char * lexiconName, const char * lexiconContent, unsigned int lexiconLength, const char * params, LexiconCallBack callback, void * userData) {
             
             
             
             
             
-            return QISRUpdateLexicon(lexiconName, lexiconContent, lexiconLength, params, userData);
+            return QISRUpdateLexicon(lexiconName, lexiconContent, lexiconLength, params, callback, userData);
         }
         
 
@@ -340,13 +340,13 @@
 
 
         // int MSPAPI QIVWRegisterNotify(const char *sessionID, ivw_ntf_handler msgProcCb, void *userData);
-        XUNFEI_API int  xfQIVWRegisterNotify(const char * sessionID, void * userData) {
+        XUNFEI_API int  xfQIVWRegisterNotify(const char * sessionID, ivw_ntf_handler msgProcCb, void * userData) {
             
             
             
             
             
-            return QIVWRegisterNotify(sessionID, userData);
+            return QIVWRegisterNotify(sessionID, msgProcCb, userData);
         }
         
 

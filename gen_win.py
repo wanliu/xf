@@ -87,7 +87,7 @@ def show_c_def_impl(entry):
 
     try:
         log1(line)
-        (return_type, func, args) = parse(line)
+        (return_type, func, args) = parse(line, ignore=False)
         body = trans_c_body(return_type, func, args, line)
         print(body)
         print()
@@ -106,7 +106,7 @@ def show_c_def(entry):
 
     try:
         log1(line)
-        (return_type, func, args) = parse(line)
+        (return_type, func, args) = parse(line, ignore=False)
         body = trans_h_body(return_type, func, args, line)
         print(body)
         print()
