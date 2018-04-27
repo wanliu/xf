@@ -1,0 +1,7 @@
+x64/
+Debug/
+xunfei/Debug/
+xunfei/x64/
+
+ipch/
+.vs/
