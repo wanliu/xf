@@ -66,28 +66,39 @@ def trans_type(arg):
             return Type(typ, key)
 
 
+FuncDef = '(\w+\*?)?\s+(\*?\w+)\((.*?)\)'
+ConstFuncDef = '(const\s+\w+\*?)?\s+(\*?\w+)\((.*?)\)'
+
+fndefs = [ ("match", ConstFuncDef), ("search", FuncDef) ]
+
+
 def parse(line):
     line = line.replace("MSPAPI ", "")
-    m = re.search('(\w+\*?)?\s+(\*?\w+)\((.*?)\)', line)
+    # print(line)
+    for mth, fndef in fndefs:
+        if mth == "match":
+            m = re.match(fndef, line)
+        else:
+            m = re.search(fndef, line)
+        # print('M', m.groups())
+        if m is not None:
+            arg_s = m.group(3)
+            func = m.group(2)
+            return_type = m.group(1)
+            # print(args)
+            args = arg_s.split(",")
+            log1('func: %s, ret: %s, args: %s' % (func, return_type, arg_s))
+            if func[0] == '*':
+                func = func[1:]
+                return_type = return_type + '*'
 
-    if m is not None:
-        arg_s = m.group(3)
-        func = m.group(2)
-        return_type = m.group(1)
-        # print(args)
-        args = arg_s.split(",")
-        log1('func: %s, ret: %s, args: %s' % (func, return_type, arg_s))
-        if func[0] == '*':
-            func = func[1:]
-            return_type = return_type + '*'
+            tr_args = map(trans_c, args)
+            tr_args = [x for x in tr_args if x]
+            ret = trans_type(return_type)
+            # m = re.search('\s+(\w+)\(', line)
+            # m.group(1)
 
-        tr_args = map(trans_c, args)
-        tr_args = [x for x in tr_args if x]
-        ret = trans_type(return_type)
-        # m = re.search('\s+(\w+)\(', line)
-        # m.group(1)
+            # (return_type, func, args) = trans_error(return_type, func, tr_args)
+            return (ret, func, tr_args)
 
-        # (return_type, func, args) = trans_error(return_type, func, tr_args)
-        return (ret, func, tr_args)
-    else:
-        raise Exception('invalid parse')
+    raise Exception('invalid parse')

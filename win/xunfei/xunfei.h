@@ -6,7 +6,7 @@
 
 extern "C" {
 
-        XUNFEI_API void *  xfMSPDownloadData(const char * params, unsigned int * dataLen, int * errorCode);
+        XUNFEI_API const void *  xfMSPDownloadData(const char * params, unsigned int * dataLen, int * errorCode);
         
 
 
@@ -14,7 +14,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfMSPGetVersion(const char * verName, int * errorCode);
+        XUNFEI_API const char *  xfMSPGetVersion(const char * verName, int * errorCode);
         
 
 
@@ -30,7 +30,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData);
+        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData);
         
 
 
@@ -38,7 +38,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfMSPSearch(const char * params, const char * text, unsigned int * dataLen, int * errorCode);
+        XUNFEI_API const char *  xfMSPSearch(const char * params, const char * text, unsigned int * dataLen, int * errorCode);
         
 
 
@@ -46,7 +46,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfMSPUploadData(const char * dataName, void * data, unsigned int dataLen, const char * params, int * errorCode);
+        XUNFEI_API const char *  xfMSPUploadData(const char * dataName, void * data, unsigned int dataLen, const char * params, int * errorCode);
         
 
 
@@ -62,11 +62,11 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfQISEResultInfo(const char * sessionID, int * errorCode);
+        XUNFEI_API const char *  xfQISEResultInfo(const char * sessionID, int * errorCode);
         
 
 
-        XUNFEI_API char *  xfQISESessionBegin(const char * params, const char * userModelId, int * errorCode);
+        XUNFEI_API const char *  xfQISESessionBegin(const char * params, const char * userModelId, int * errorCode);
         
 
 
@@ -98,7 +98,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfQISRSessionBegin(const char * grammarList, const char * params, int * errorCode);
+        XUNFEI_API const char *  xfQISRSessionBegin(const char * grammarList, const char * params, int * errorCode);
         
 
 
@@ -126,7 +126,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfQIVWSessionBegin(const char * grammarList, const char * params, int * errorCode);
+        XUNFEI_API const char *  xfQIVWSessionBegin(const char * grammarList, const char * params, int * errorCode);
         
 
 
@@ -134,11 +134,11 @@ extern "C" {
         
 
 
-        XUNFEI_API void *  xfQTTSAudioGet(const char * sessionID, unsigned int * audioLen, int * synthStatus, int * errorCode);
+        XUNFEI_API const void *  xfQTTSAudioGet(const char * sessionID, unsigned int * audioLen, int * synthStatus, int * errorCode);
         
 
 
-        XUNFEI_API char *  xfQTTSAudioInfo(const char * sessionID);
+        XUNFEI_API const char *  xfQTTSAudioInfo(const char * sessionID);
         
 
 
@@ -146,7 +146,7 @@ extern "C" {
         
 
 
-        XUNFEI_API char *  xfQTTSSessionBegin(const char * params, int * errorCode);
+        XUNFEI_API const char *  xfQTTSSessionBegin(const char * params, int * errorCode);
         
 
 

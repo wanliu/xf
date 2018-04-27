@@ -4,13 +4,13 @@
 
 
         // const void* MSPAPI MSPDownloadData(const char* params, unsigned int* dataLen, int* errorCode);
-        XUNFEI_API void *  xfMSPDownloadData(const char * params, unsigned int * dataLen, int * errorCode) {
+        XUNFEI_API const void *  xfMSPDownloadData(const char * params, unsigned int * dataLen, int * errorCode) {
             
             
             
             
             
-            return MSPDownloadData(params, dataLen, errorCode)
+            return MSPDownloadData(params, dataLen, errorCode);
         }
         
 
@@ -22,19 +22,19 @@
             
             
             
-            return MSPGetParam(paramName, paramValue, valueLen)
+            return MSPGetParam(paramName, paramValue, valueLen);
         }
         
 
 
         // const char* MSPAPI MSPGetVersion(const char *verName, int *errorCode);
-        XUNFEI_API char *  xfMSPGetVersion(const char * verName, int * errorCode) {
+        XUNFEI_API const char *  xfMSPGetVersion(const char * verName, int * errorCode) {
             
             
             
             
             
-            return MSPGetVersion(verName, errorCode)
+            return MSPGetVersion(verName, errorCode);
         }
         
 
@@ -46,7 +46,7 @@
             
             
             
-            return MSPLogin(usr, pwd, params)
+            return MSPLogin(usr, pwd, params);
         }
         
 
@@ -58,7 +58,7 @@
             
             
             
-            return MSPLogout()
+            return MSPLogout();
         }
         
 
@@ -70,19 +70,19 @@
             
             
             
-            return MSPNlpSchCancel(sessionID, hints)
+            return MSPNlpSchCancel(sessionID, hints);
         }
         
 
 
         // const char* MSPAPI MSPNlpSearch(const char* params, const char* text, unsigned int textLen, int *errorCode, NLPSearchCB callback, void *userData);
-        XUNFEI_API char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData) {
+        XUNFEI_API const char *  xfMSPNlpSearch(const char * params, const char * text, unsigned int textLen, int * errorCode, void * userData) {
             
             
             
             
             
-            return MSPNlpSearch(params, text, textLen, errorCode, userData)
+            return MSPNlpSearch(params, text, textLen, errorCode, userData);
         }
         
 
@@ -94,19 +94,19 @@
             
             
             
-            return MSPRegisterNotify(userData)
+            return MSPRegisterNotify(userData);
         }
         
 
 
         // const char* MSPAPI MSPSearch(const char* params, const char* text, unsigned int* dataLen, int* errorCode);
-        XUNFEI_API char *  xfMSPSearch(const char * params, const char * text, unsigned int * dataLen, int * errorCode) {
+        XUNFEI_API const char *  xfMSPSearch(const char * params, const char * text, unsigned int * dataLen, int * errorCode) {
             
             
             
             
             
-            return MSPSearch(params, text, dataLen, errorCode)
+            return MSPSearch(params, text, dataLen, errorCode);
         }
         
 
@@ -118,19 +118,19 @@
             
             
             
-            return MSPSetParam(paramName, paramValue)
+            return MSPSetParam(paramName, paramValue);
         }
         
 
 
         // const char* MSPAPI MSPUploadData(const char* dataName, void* data, unsigned int dataLen, const char* params, int* errorCode);
-        XUNFEI_API char *  xfMSPUploadData(const char * dataName, void * data, unsigned int dataLen, const char * params, int * errorCode) {
+        XUNFEI_API const char *  xfMSPUploadData(const char * dataName, void * data, unsigned int dataLen, const char * params, int * errorCode) {
             
             
             
             
             
-            return MSPUploadData(dataName, data, dataLen, params, errorCode)
+            return MSPUploadData(dataName, data, dataLen, params, errorCode);
         }
         
 
@@ -142,7 +142,7 @@
             
             
             
-            return QISEAudioWrite(sessionID, waveData, waveLen, audioStatus, epStatus, Status)
+            return QISEAudioWrite(sessionID, waveData, waveLen, audioStatus, epStatus, Status);
         }
         
 
@@ -154,7 +154,7 @@
             
             
             
-            return QISEGetParam(sessionID, paramName, paramValue, valueLen)
+            return QISEGetParam(sessionID, paramName, paramValue, valueLen);
         }
         
 
@@ -166,31 +166,31 @@
             
             
             
-            return QISEGetResult(sessionID, rsltLen, rsltStatus, errorCode)
+            return QISEGetResult(sessionID, rsltLen, rsltStatus, errorCode);
         }
         
 
 
         // const char* MSPAPI QISEResultInfo(const char* sessionID, int *errorCode);
-        XUNFEI_API char *  xfQISEResultInfo(const char * sessionID, int * errorCode) {
+        XUNFEI_API const char *  xfQISEResultInfo(const char * sessionID, int * errorCode) {
             
             
             
             
             
-            return QISEResultInfo(sessionID, errorCode)
+            return QISEResultInfo(sessionID, errorCode);
         }
         
 
 
         // const char* MSPAPI QISESessionBegin(const char* params, const char* userModelId, int* errorCode);
-        XUNFEI_API char *  xfQISESessionBegin(const char * params, const char * userModelId, int * errorCode) {
+        XUNFEI_API const char *  xfQISESessionBegin(const char * params, const char * userModelId, int * errorCode) {
             
             
             
             
             
-            return QISESessionBegin(params, userModelId, errorCode)
+            return QISESessionBegin(params, userModelId, errorCode);
         }
         
 
@@ -202,7 +202,7 @@
             
             
             
-            return QISESessionEnd(sessionID, hints)
+            return QISESessionEnd(sessionID, hints);
         }
         
 
@@ -214,7 +214,7 @@
             
             
             
-            return QISETextPut(sessionID, textString, textLen, params)
+            return QISETextPut(sessionID, textString, textLen, params);
         }
         
 
@@ -226,7 +226,7 @@
             
             
             
-            return QISRAudioWrite(sessionID, waveData, waveLen, audioStatus, epStatus, recogStatus)
+            return QISRAudioWrite(sessionID, waveData, waveLen, audioStatus, epStatus, recogStatus);
         }
         
 
@@ -238,7 +238,7 @@
             
             
             
-            return QISRBuildGrammar(grammarType, grammarContent, grammarLength, params, userData)
+            return QISRBuildGrammar(grammarType, grammarContent, grammarLength, params, userData);
         }
         
 
@@ -250,7 +250,7 @@
             
             
             
-            return QISRGetBinaryResult(sessionID, rsltLen, rsltStatus, waitTime, errorCode)
+            return QISRGetBinaryResult(sessionID, rsltLen, rsltStatus, waitTime, errorCode);
         }
         
 
@@ -262,7 +262,7 @@
             
             
             
-            return QISRGetParam(sessionID, paramName, paramValue, valueLen)
+            return QISRGetParam(sessionID, paramName, paramValue, valueLen);
         }
         
 
@@ -274,19 +274,19 @@
             
             
             
-            return QISRGetResult(sessionID, rsltStatus, waitTime, errorCode)
+            return QISRGetResult(sessionID, rsltStatus, waitTime, errorCode);
         }
         
 
 
         // const char* MSPAPI QISRSessionBegin(const char* grammarList, const char* params, int* errorCode);
-        XUNFEI_API char *  xfQISRSessionBegin(const char * grammarList, const char * params, int * errorCode) {
+        XUNFEI_API const char *  xfQISRSessionBegin(const char * grammarList, const char * params, int * errorCode) {
             
             
             
             
             
-            return QISRSessionBegin(grammarList, params, errorCode)
+            return QISRSessionBegin(grammarList, params, errorCode);
         }
         
 
@@ -298,7 +298,7 @@
             
             
             
-            return QISRSessionEnd(sessionID, hints)
+            return QISRSessionEnd(sessionID, hints);
         }
         
 
@@ -310,7 +310,7 @@
             
             
             
-            return QISRSetParam(sessionID, paramName, paramValue)
+            return QISRSetParam(sessionID, paramName, paramValue);
         }
         
 
@@ -322,7 +322,7 @@
             
             
             
-            return QISRUpdateLexicon(lexiconName, lexiconContent, lexiconLength, params, userData)
+            return QISRUpdateLexicon(lexiconName, lexiconContent, lexiconLength, params, userData);
         }
         
 
@@ -334,7 +334,7 @@
             
             
             
-            return QIVWAudioWrite(sessionID, audioData, audioLen, audioStatus)
+            return QIVWAudioWrite(sessionID, audioData, audioLen, audioStatus);
         }
         
 
@@ -346,7 +346,7 @@
             
             
             
-            return QIVWRegisterNotify(sessionID, userData)
+            return QIVWRegisterNotify(sessionID, userData);
         }
         
 
@@ -358,19 +358,19 @@
             
             
             
-            return QIVWResMerge(srcPath, destPath, params)
+            return QIVWResMerge(srcPath, destPath, params);
         }
         
 
 
         // const char* MSPAPI QIVWSessionBegin(const char *grammarList, const char *params, int *errorCode);
-        XUNFEI_API char *  xfQIVWSessionBegin(const char * grammarList, const char * params, int * errorCode) {
+        XUNFEI_API const char *  xfQIVWSessionBegin(const char * grammarList, const char * params, int * errorCode) {
             
             
             
             
             
-            return QIVWSessionBegin(grammarList, params, errorCode)
+            return QIVWSessionBegin(grammarList, params, errorCode);
         }
         
 
@@ -382,31 +382,31 @@
             
             
             
-            return QIVWSessionEnd(sessionID, hints)
+            return QIVWSessionEnd(sessionID, hints);
         }
         
 
 
         // const void* MSPAPI QTTSAudioGet(const char* sessionID, unsigned int* audioLen, int* synthStatus, int* errorCode);
-        XUNFEI_API void *  xfQTTSAudioGet(const char * sessionID, unsigned int * audioLen, int * synthStatus, int * errorCode) {
+        XUNFEI_API const void *  xfQTTSAudioGet(const char * sessionID, unsigned int * audioLen, int * synthStatus, int * errorCode) {
             
             
             
             
             
-            return QTTSAudioGet(sessionID, audioLen, synthStatus, errorCode)
+            return QTTSAudioGet(sessionID, audioLen, synthStatus, errorCode);
         }
         
 
 
         // const char* MSPAPI QTTSAudioInfo(const char* sessionID);
-        XUNFEI_API char *  xfQTTSAudioInfo(const char * sessionID) {
+        XUNFEI_API const char *  xfQTTSAudioInfo(const char * sessionID) {
             
             
             
             
             
-            return QTTSAudioInfo(sessionID)
+            return QTTSAudioInfo(sessionID);
         }
         
 
@@ -418,19 +418,19 @@
             
             
             
-            return QTTSGetParam(sessionID, paramName, paramValue, valueLen)
+            return QTTSGetParam(sessionID, paramName, paramValue, valueLen);
         }
         
 
 
         // const char* MSPAPI QTTSSessionBegin(const char* params, int* errorCode);
-        XUNFEI_API char *  xfQTTSSessionBegin(const char * params, int * errorCode) {
+        XUNFEI_API const char *  xfQTTSSessionBegin(const char * params, int * errorCode) {
             
             
             
             
             
-            return QTTSSessionBegin(params, errorCode)
+            return QTTSSessionBegin(params, errorCode);
         }
         
 
@@ -442,7 +442,7 @@
             
             
             
-            return QTTSSessionEnd(sessionID, hints)
+            return QTTSSessionEnd(sessionID, hints);
         }
         
 
@@ -454,7 +454,7 @@
             
             
             
-            return QTTSSetParam(sessionID, paramName, paramValue)
+            return QTTSSetParam(sessionID, paramName, paramValue);
         }
         
 
@@ -466,7 +466,7 @@
             
             
             
-            return QTTSTextPut(sessionID, textString, textLen, params)
+            return QTTSTextPut(sessionID, textString, textLen, params);
         }
         
 

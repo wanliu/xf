@@ -77,7 +77,7 @@ class CTransform(object):
             {kernal}
             {after}
             {free_vars}
-            {default_return}
+            {default_return};
         }}
         """
         return tpl.format(**ctxt)
