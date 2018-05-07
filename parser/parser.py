@@ -74,8 +74,9 @@ def trans_type(arg, ignore=True):
 
 FuncDef = '(\w+\*?)?\s+(\*?\w+)\((.*?)\)'
 ConstFuncDef = '(const\s+\w+\*?)?\s+(\*?\w+)\((.*?)\)'
+ConstFuncDef2 = '(const\s+\w+\s+\*?)?\s+(\*?\w+)\((.*?)\)'
 
-fndefs = [ ("match", ConstFuncDef), ("search", FuncDef) ]
+fndefs = [ ("match", ConstFuncDef),  ("match", ConstFuncDef2), ("search", FuncDef) ]
 
 
 def parse(line, ignore=True):

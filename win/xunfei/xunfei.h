@@ -1,3 +1,5 @@
+#include "xf.h"
+
 #ifdef XUNFEI_EXPORTS
 #define XUNFEI_API __declspec(dllexport)
 #else
@@ -58,7 +60,7 @@ extern "C" {
         
 
 
-        XUNFEI_API   xfQISEGetResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int * errorCode);
+        XUNFEI_API const char *   xfQISEGetResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int * errorCode);
         
 
 
@@ -86,7 +88,7 @@ extern "C" {
         
 
 
-        XUNFEI_API   xfQISRGetBinaryResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int waitTime, int * errorCode);
+        XUNFEI_API const char *   xfQISRGetBinaryResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int waitTime, int * errorCode);
         
 
 
@@ -94,7 +96,7 @@ extern "C" {
         
 
 
-        XUNFEI_API   xfQISRGetResult(const char * sessionID, int * rsltStatus, int waitTime, int * errorCode);
+        XUNFEI_API const char *   xfQISRGetResult(const char * sessionID, int * rsltStatus, int waitTime, int * errorCode);
         
 
 

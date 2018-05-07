@@ -160,7 +160,7 @@
 
 
         // const char * MSPAPI QISEGetResult(const char* sessionID, unsigned int* rsltLen, int* rsltStatus, int *errorCode);
-        XUNFEI_API   xfQISEGetResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int * errorCode) {
+        XUNFEI_API const char *   xfQISEGetResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int * errorCode) {
             
             
             
@@ -244,7 +244,7 @@
 
 
         // const char * MSPAPI QISRGetBinaryResult(const char* sessionID, unsigned int* rsltLen,int* rsltStatus, int waitTime, int *errorCode);
-        XUNFEI_API   xfQISRGetBinaryResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int waitTime, int * errorCode) {
+        XUNFEI_API const char *   xfQISRGetBinaryResult(const char * sessionID, unsigned int * rsltLen, int * rsltStatus, int waitTime, int * errorCode) {
             
             
             
@@ -268,7 +268,7 @@
 
 
         // const char * MSPAPI QISRGetResult(const char* sessionID, int* rsltStatus, int waitTime, int *errorCode);
-        XUNFEI_API   xfQISRGetResult(const char * sessionID, int * rsltStatus, int waitTime, int * errorCode) {
+        XUNFEI_API const char *   xfQISRGetResult(const char * sessionID, int * rsltStatus, int waitTime, int * errorCode) {
             
             
             
