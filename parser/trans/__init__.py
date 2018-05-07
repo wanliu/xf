@@ -8,4 +8,5 @@ from ret import *
 from status import *
 from c_func import *
 from h_func import *
+from win_go import *
 from type import *

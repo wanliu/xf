@@ -21,6 +21,10 @@ gen_win_h:
 gen_win_c:
 	@python gen_win.py -e EXPORTS | cat xunfei.cpp.y - > win/xunfei/xunfei.cpp
 
+gen_win_go:
+	@python gen_win.py -e EXPORTS -g | cat xf_windows.y - > xf_windows.go
+	@go fmt xf_windows.go
+
 gen: gen_xf.go
 
 gen_win: gen_win_h gen_win_c

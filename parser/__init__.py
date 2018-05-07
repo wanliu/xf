@@ -41,6 +41,17 @@ def trans_h_body(return_type, func, args, source=None):
     return wrapper.gen()
 
 
+def trans_go_body(return_type, func, args, source=None):
+    wrapper = Wrapper(return_type, func, args, source)
+
+    wrapper.wrap(WinGoTransform)
+    wrapper.wrap(WinGoTypeTransform)
+    wrapper.wrap(Pointer2RetTransform)
+    wrapper.wrap(WinGoStatusTransform)
+
+    return wrapper.gen()
+
+
 def trans_error(return_type, func, args):
     if func in STATUS_RETURN:
         return ("error", func, args)
