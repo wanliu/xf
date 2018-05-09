@@ -11,4 +11,7 @@ func main() {
 		log.Fatalf("login failed %s", err)
 	}
 
+	if err := xf.MSPLogout(); err != nil {
+		log.Fatalf("logout failed", err)
+	}
 }

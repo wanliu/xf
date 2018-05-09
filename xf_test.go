@@ -49,6 +49,7 @@ func get_audio_result(sessionId string, status int) (string, error) {
 }
 
 func TestQISR(t *testing.T) {
+	loginParams := fmt.Sprintf("appid = %s, work_dir = .", appId)
 
 	if err := MSPLogin(loginParams); err != nil {
 		t.Fatalf("login failed %s", err)
