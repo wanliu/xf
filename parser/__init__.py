@@ -46,7 +46,7 @@ def trans_go_body(return_type, func, args, source=None):
 
     wrapper.wrap(WinGoTransform)
     wrapper.wrap(WinGoTypeTransform)
-    wrapper.wrap(Pointer2RetTransform)
+    wrapper.wrap(WinGoPointer2RetTransform)
     wrapper.wrap(WinGoStatusTransform)
 
     return wrapper.gen()

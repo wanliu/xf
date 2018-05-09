@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 	"time"
+	"fmt"
 )
 
 const (
@@ -14,13 +15,16 @@ const (
 	HINTS_SIZE  = 100
 )
 
+var appId = "58c51121"
+
 func TestXF(t *testing.T) {
-	if err := MSPLogin("appid = 58c51121, work_dir = ."); err != nil {
-		t.Fatalf("login failed", err)
+	params := fmt.Sprintf("appid = %s, work_dir = .", appId)
+	if err := MSPLogin(params); err != nil {
+		t.Fatalf("login failed %s", err)
 	}
 
 	if err := MSPLogout(); err != nil {
-		t.Fatalf("logout failed", err)
+		t.Fatalf("logout failed %s", err)
 	}
 }
 
@@ -45,8 +49,9 @@ func get_audio_result(sessionId string, status int) (string, error) {
 }
 
 func TestQISR(t *testing.T) {
-	if err := MSPLogin("appid = 58c51121, work_dir = ."); err != nil {
-		t.Fatalf("login failed", err)
+
+	if err := MSPLogin(loginParams); err != nil {
+		t.Fatalf("login failed %s", err)
 	}
 
 	var params = "sub = iat, domain = iat, language = zh_cn, accent = mandarin, sample_rate = 16000, result_type = plain, result_encoding = utf8"
@@ -118,6 +123,13 @@ iat_exit:
 	}
 
 	if err := MSPLogout(); err != nil {
-		t.Fatalf("logout failed", err)
+		t.Fatalf("logout failed %s", err)
+	}
+}
+
+
+func init() {
+	if a := os.Getenv("APPID"); len(a) > 0 {
+		appId = a
 	}
 }

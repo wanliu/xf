@@ -15,14 +15,11 @@ import (
 	"unsafe"
 )
 
-const MSP_REC_STATUS_COMPLETE = C.MSP_REC_STATUS_COMPLETE
-const MSP_EP_AFTER_SPEECH = C.MSP_EP_AFTER_SPEECH
-const MSP_REC_STATUS_SUCCESS = C.MSP_REC_STATUS_SUCCESS
-const MSP_AUDIO_SAMPLE_CONTINUE = C.MSP_AUDIO_SAMPLE_CONTINUE
-const MSP_EP_LOOKING_FOR_SPEECH = C.MSP_EP_LOOKING_FOR_SPEECH
-const MSP_AUDIO_SAMPLE_FIRST = C.MSP_AUDIO_SAMPLE_FIRST
-const MSP_AUDIO_SAMPLE_LAST = C.MSP_AUDIO_SAMPLE_LAST
-const MSP_TTS_FLAG_DATA_END = C.MSP_TTS_FLAG_DATA_END
+type NLPSearchCB C.NLPSearchCB
+type MSP_STATUS_NTF_HANDLER C.msp_status_ntf_handler
+type GrammarCallBack C.GrammarCallBack
+type LexiconCallBack C.LexiconCallBack
+type MsgProcCallBack func() 
 
 func CString(str string) *C.char {
 	return C.CString(str + string(0))
@@ -35,7 +32,7 @@ func MSPDownloadData(params string) ([]byte, error) {
 
 	ret := C.MSPDownloadData(CString(params), &dataLen, &errorCode)
 	if errorCode != C.MSP_SUCCESS {
-		return nil, fmt.Errorf("MSPLogin failed, error %d", int(errorCode))
+		return nil, fmt.Errorf("MSPDownloadData failed, error %d", int(errorCode))
 	}
 
 	return C.GoBytes(ret, C.int(dataLen)), nil
@@ -100,28 +97,37 @@ func MSPNlpSchCancel(sessionID string, hints string) error {
 }
 
 // const char* MSPAPI MSPNlpSearch(const char* params, const char* text, unsigned int textLen, int *errorCode, NLPSearchCB callback, void *userData);
-func MSPNlpSearch(params string, text string, userData []byte, callback C.NLPSearchCB) (string, error) {
+func MSPNlpSearch(params string, text string, callback NLPSearchCB) (string, []byte, error) {
 	var errorCode C.int
 	var txt = CString(text)
 	var textLen = C.strlen(txt)
+	var userData = make([]byte, 256*1024)
 
-	ret := C.MSPNlpSearch(CString(params), txt, C.uint(textLen), &errorCode, callback, C.CBytes(userData))
+	ret := C.MSPNlpSearch(
+		CString(params),
+		txt,
+		C.uint(textLen),
+		&errorCode,
+		C.NLPSearchCB(callback),
+		unsafe.Pointer(&userData[0]),
+	)
 	if errorCode != C.MSP_SUCCESS {
-		return "", fmt.Errorf("MSPNlpSearch failed, error %d", int(errorCode))
+		return "", nil, fmt.Errorf("MSPNlpSearch failed, error %d", int(errorCode))
 	}
 
-	return C.GoString(ret), nil
+	return C.GoString(ret), userData, nil
 }
 
 // int MSPAPI MSPRegisterNotify( msp_status_ntf_handler statusCb, void *userData );
-func MSPRegisterNotify(statusCb C.msp_status_ntf_handler, userData []byte) error {
+func MSPRegisterNotify(statusCb MSP_STATUS_NTF_HANDLER) ([]byte, error) {
+	var userData = make([]byte, 256*1024)
+	ret := C.MSPRegisterNotify(statusCb, unsafe.Pointer(&userData[0]))
 
-	ret := C.MSPRegisterNotify(statusCb, C.CBytes(userData))
 	if ret != C.MSP_SUCCESS {
-		return fmt.Errorf("MSPRegisterNotify failed, error %d", int(ret))
+		return nil, fmt.Errorf("MSPRegisterNotify failed, error %d", int(ret))
 	}
 
-	return nil
+	return userData, nil
 }
 
 // const char* MSPAPI MSPSearch(const char* params, const char* text, unsigned int* dataLen, int* errorCode);
@@ -188,7 +194,7 @@ func QISEGetParam(sessionID string, paramName string) (string, error) {
 }
 
 // const char * MSPAPI QISEGetResult(const char* sessionID, unsigned int* rsltLen, int* rsltStatus, int *errorCode);
-func QISEGetResult(sessionID string) (string, C.int, error) {
+func QISEGetResult(sessionID string) (string, int, error) {
 	var rsltLen C.uint
 	var rsltStatus C.int
 	var errorCode C.int
@@ -198,7 +204,7 @@ func QISEGetResult(sessionID string) (string, C.int, error) {
 		return "", 0, fmt.Errorf("QISEGetResult failed, error %d", int(errorCode))
 	}
 
-	return C.GoStringN(ret, C.int(rsltLen)), rsltStatus, nil
+	return C.GoStringN(ret, C.int(rsltLen)), int(rsltStatus), nil
 }
 
 // const char* MSPAPI QISEResultInfo(const char* sessionID, int *errorCode);
@@ -243,7 +249,7 @@ func QISETextPut(sessionID string, textString string, params string) error {
 
 	ret := C.QISETextPut(C.CString(sessionID), C.CString(textString), C.uint(textLen), CString(params))
 	if ret != C.MSP_SUCCESS {
-		return fmt.Errorf("QISESessionEnd failed, error %d", int(ret))
+		return fmt.Errorf("QISETextPut failed, error %d", int(ret))
 	}
 
 	return nil
@@ -271,19 +277,20 @@ func QISRAudioWrite(_sessionID string, waveData []byte, audioStatus int) (int, i
 }
 
 // int MSPAPI QISRBuildGrammar(const char *grammarType, const char *grammarContent, unsigned int grammarLength, const char *params, GrammarCallBack callback, void *userData);
-func QISRBuildGrammar(grammarType string, grammarContent string, params string, userData []byte, callback C.GrammarCallBack) ([]byte, error) {
+func QISRBuildGrammar(grammarType string, grammarContent string, params string, callback GrammarCallBack) ([]byte, error) {
 	var grammarLength = C.strlen(C.CString(grammarContent))
+	var userData = make([]byte, 256*1024)
 
-	ret := C.QISRBuildGrammar(C.CString(grammarType), C.CString(grammarContent), C.uint(grammarLength), C.CString(params), callback, C.CBytes(userData))
+	ret := C.QISRBuildGrammar(C.CString(grammarType), C.CString(grammarContent), C.uint(grammarLength), C.CString(params), C.GrammarCallBack(callback), C.CBytes(userData))
 	if ret != C.MSP_SUCCESS {
 		return nil, fmt.Errorf("QISRBuildGrammar failed, error %d", int(ret))
 	}
 
-	return C.GoBytes(unsafe.Pointer(&userData[0]), C.int(len(userData))), nil
+	return userData, nil
 }
 
 // const char * MSPAPI QISRGetBinaryResult(const char* sessionID, unsigned int* rsltLen,int* rsltStatus, int waitTime, int *errorCode);
-func QISRGetBinaryResult(sessionID string, waitTime int) (string, C.int, error) {
+func QISRGetBinaryResult(sessionID string, waitTime int) (string, int, error) {
 	var rsltLen C.uint
 	var rsltStatus C.int
 	var errorCode C.int
@@ -293,7 +300,7 @@ func QISRGetBinaryResult(sessionID string, waitTime int) (string, C.int, error) 
 		return "", 0, fmt.Errorf("QISRGetBinaryResult failed, error %d", int(errorCode))
 	}
 
-	return C.GoStringN(ret, C.int(rsltLen)), rsltStatus, nil
+	return C.GoStringN(ret, C.int(rsltLen)), int(rsltStatus), nil
 }
 
 // int MSPAPI QISRGetParam(const char* sessionID, const char* paramName, char* paramValue, unsigned int* valueLen);
@@ -360,10 +367,10 @@ func QISRSetParam(sessionID string, paramName string, paramValue string) error {
 }
 
 //* int MSPAPI QISRUpdateLexicon(const char *lexiconName, const char *lexiconContent, unsigned int lexiconLength, const char *params, LexiconCallBack callback, void *userData);
-func QISRUpdateLexicon(lexiconName string, lexiconContent string, params string, userData []byte, callback C.LexiconCallBack) error {
+func QISRUpdateLexicon(lexiconName string, lexiconContent string, params string, userData []byte, callback LexiconCallBack) error {
 	var lexiconLength = C.strlen(C.CString(lexiconContent))
 
-	ret := C.QISRUpdateLexicon(C.CString(lexiconName), C.CString(lexiconContent), C.uint(lexiconLength), C.CString(params), callback, C.CBytes(userData))
+	ret := C.QISRUpdateLexicon(C.CString(lexiconName), C.CString(lexiconContent), C.uint(lexiconLength), C.CString(params), C.LexiconCallBack(callback), C.CBytes(userData))
 	if ret != C.MSP_SUCCESS {
 		return fmt.Errorf("QISRUpdateLexicon failed, error %d", int(ret))
 	}
@@ -372,7 +379,7 @@ func QISRUpdateLexicon(lexiconName string, lexiconContent string, params string,
 }
 
 // const void* MSPAPI QTTSAudioGet(const char* sessionID, unsigned int* audioLen, int* synthStatus, int* errorCode);
-func QTTSAudioGet(sessionID string) ([]byte, C.int, error) {
+func QTTSAudioGet(sessionID string) ([]byte, int, error) {
 	var audioLen C.uint
 	var synthStatus C.int
 	var errorCode C.int
@@ -382,7 +389,7 @@ func QTTSAudioGet(sessionID string) ([]byte, C.int, error) {
 		return nil, 0, fmt.Errorf("QTTSAudioGet failed, error %d", int(errorCode))
 	}
 
-	return C.GoBytes(ret, C.int(audioLen)), synthStatus, nil
+	return C.GoBytes(ret, C.int(audioLen)), int(synthStatus), nil
 }
 
 // const char* MSPAPI QTTSAudioInfo(const char* sessionID);
@@ -461,7 +468,7 @@ func QIVWAudioWrite(sessionID string, audioData []byte, audioStatus int) error {
 }
 
 // int MSPAPI QIVWRegisterNotify(const char *sessionID, ivw_ntf_handler msgProcCb, void *userData);
-func QIVWRegisterNotify(sessionID string, userData []byte) error {
+func QIVWRegisterNotify(sessionID string, userData []byte, ivw_ntf_handler MsgProcCallBack) error {
 	cb := C.ivwhandler
 
 	ret := C.QIVWRegisterNotify(C.CString(sessionID), cb, unsafe.Pointer(&userData[0]))
@@ -473,15 +480,15 @@ func QIVWRegisterNotify(sessionID string, userData []byte) error {
 }
 
 // int MSPAPI QIVWResMerge(const char *srcPath, const char *destPath, const char *params);
-// func QIVWResMerge(srcPath string, destPath string, params string) int {
+func QIVWResMerge(srcPath string, destPath string, params string) error {
 
-// 	ret := C.QIVWResMerge(C.CString(srcPath), C.CString(destPath), C.CString(params))
-// 	if ret != C.MSP_SUCCESS {
-// 		return
-// 	}
+	ret := C.QIVWResMerge(C.CString(srcPath), C.CString(destPath), C.CString(params))
+	if ret != C.MSP_SUCCESS {
+		return fmt.Errorf("QIVWResMerge failed, error %d", int(ret))
+	}
 
-// 	return C.QIVWResMerge(C.CString(srcPath), C.CString(destPath), C.CString(params))
-// }
+	return nil
+}
 
 // typedef int( *ivw_ntf_handler)( const char *sessionID, int msg, int param1, int param2, const void *info, void *userData );
 

@@ -1,0 +1,57 @@
+package xf
+
+const (
+	MSP_AUDIO_SAMPLE_INIT           = 0x00
+    MSP_AUDIO_SAMPLE_FIRST          = 0x01
+    MSP_AUDIO_SAMPLE_CONTINUE       = 0x02
+    MSP_AUDIO_SAMPLE_LAST           = 0x04
+)
+
+const (
+	MSP_REC_STATUS_SUCCESS              = 0
+	MSP_REC_STATUS_NO_MATCH             = 1
+	MSP_REC_STATUS_INCOMPLETE			= 2
+	MSP_REC_STATUS_NON_SPEECH_DETECTED  = 3
+	MSP_REC_STATUS_SPEECH_DETECTED      = 4
+	MSP_REC_STATUS_COMPLETE				= 5
+	MSP_REC_STATUS_MAX_CPU_TIME         = 6
+	MSP_REC_STATUS_MAX_SPEECH           = 7
+	MSP_REC_STATUS_STOPPED              = 8
+	MSP_REC_STATUS_REJECTED             = 9
+	MSP_REC_STATUS_NO_SPEECH_FOUND      = 10
+	MSP_REC_STATUS_FAILURE = MSP_REC_STATUS_NO_MATCH
+)
+
+
+const (
+	MSP_EP_LOOKING_FOR_SPEECH   = 0
+	MSP_EP_IN_SPEECH            = 1
+	MSP_EP_AFTER_SPEECH         = 3
+	MSP_EP_TIMEOUT              = 4
+	MSP_EP_ERROR                = 5
+	MSP_EP_MAX_SPEECH           = 6
+	MSP_EP_IDLE                 = 7  // interna
+)
+
+const (
+    MSP_TTS_FLAG_STILL_HAVE_DATA        = 1
+    MSP_TTS_FLAG_DATA_END               = 2
+    MSP_TTS_FLAG_CMD_CANCELED           = 4
+)
+
+const (
+	MSP_IVW_MSG_WAKEUP       = 1
+	MSP_IVW_MSG_ERROR        = 2
+	MSP_IVW_MSG_ISR_RESULT   = 3
+	MSP_IVW_MSG_ISR_EPS      = 4
+	MSP_IVW_MSG_VOLUME       = 5
+	MSP_IVW_MSG_ENROLL       = 6
+	MSP_IVW_MSG_RESET        = 7
+)
+
+const (
+	MSP_DATA_SAMPLE_INIT           = 0x00
+	MSP_DATA_SAMPLE_FIRST          = 0x01
+	MSP_DATA_SAMPLE_CONTINUE       = 0x02
+	MSP_DATA_SAMPLE_LAST           = 0x04
+)
