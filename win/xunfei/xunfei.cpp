@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "xunfei.h"
 #include "xf.h"
+#include "xf_ui.h"
 
 
         // const void* MSPAPI MSPDownloadData(const char* params, unsigned int* dataLen, int* errorCode);

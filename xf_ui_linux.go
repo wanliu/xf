@@ -9,7 +9,6 @@ int callEventListener(Event *evt); // Forward declaration.
 */
 import "C"
 import (
-	"sync"
 	"unsafe"
 )
 
@@ -33,10 +32,6 @@ type Message struct {
 type Buffer struct {
 	buffer *C.MessageBuffer
 }
-
-type EventHandler func(evt *Event) error
-
-type Map map[string]interface{}
 
 //export goEventListner
 func goEventListner(idx C.int, v *C.Event) {
@@ -201,31 +196,4 @@ func (db *DataBundle) GetBinary(key string) *Buffer {
 func (buf *Buffer) Data() []byte {
 	size := C.BufferGetSize(buf.buffer)
 	return C.GoBytes(C.BufferGetData(buf.buffer), size)
-}
-
-var mu sync.Mutex
-var index int
-var fns = make(map[int]func(*Event))
-
-func register(fn func(*Event)) int {
-	mu.Lock()
-	defer mu.Unlock()
-	index++
-	for fns[index] != nil {
-		index++
-	}
-	fns[index] = fn
-	return index
-}
-
-func lookup(i int) func(*Event) {
-	mu.Lock()
-	defer mu.Unlock()
-	return fns[i]
-}
-
-func unregister(i int) {
-	mu.Lock()
-	defer mu.Unlock()
-	delete(fns, i)
 }

@@ -129,7 +129,7 @@ func TestXFUI_Wav(t *testing.T) {
 	}
 
 	cfg["login"] = map[string]interface{}{
-		"appid": "58c51121",
+		"appid": appId,
 	}
 
 	buf, err := json.Marshal(cfg)
@@ -158,4 +158,10 @@ func TestXFUI_Wav(t *testing.T) {
 	agent.SendMessage(msg)
 	msg.Destroy()
 	time.Sleep(3 * time.Second)
+}
+
+func init() {
+	if a := os.Getenv("APPID"); len(a) > 0 {
+		appId = a
+	}
 }
