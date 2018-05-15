@@ -1,6 +1,7 @@
 package xf
 
 import (
+	"C"
 	"syscall"
 	"unsafe"
 )
@@ -10,7 +11,7 @@ type Event struct {
 }
 
 type Listener struct {
-	listener uintptr
+	clListener uintptr
 }
 
 type Agent struct {
@@ -57,8 +58,8 @@ var (
 	procBufferGetSize       = xunfei.NewProc("xfuiBufferGetSize")
 )
 
-func eventListnerCallback(idx int, v uintptr) uintptr {
-	fn := lookup(idx)
+func eventListnerCallback(idx, v uintptr) uintptr {
+	fn := lookup(int(idx))
 	fn(&Event{event: v})
 	return 0
 }
@@ -66,10 +67,11 @@ func eventListnerCallback(idx int, v uintptr) uintptr {
 func NewListener(handle func(*Event)) *Listener {
 	var listener Listener
 	i := register(handle)
-	procCreateListener.Call(
+	if _, _, err := procCreateListener.Call(
 		uintptr(i),
 		syscall.NewCallback(eventListnerCallback),
-		uintptr(unsafe.Pointer(&listener)))
+		uintptr(unsafe.Pointer(&listener))); err != nil {
+	}
 	// li := C.createListener(C.int(i), (C.CallbackFcn)(unsafe.Pointer(C.callEventListener)))
 	// listener.listener = li
 
@@ -293,15 +295,14 @@ func (db *DataBundle) PutBinary(key string, val *Buffer, replace bool) bool {
 func (db *DataBundle) GetBinary(key string) *Buffer {
 	var buffer Buffer
 	procDataBundleGetBinary.Call(
-		db.bundle,
+		uintptr(unsafe.Pointer(db)),
 		uintptr(unsafeString(key)),
 		uintptr(unsafe.Pointer(&buffer)))
 	return &buffer
 }
 
 func (buf *Buffer) Data() []byte {
-	size, _, _ := procBufferGetSize.Call(buf.buffer)
-	r1, _, _ := procBufferGetData.Call(buf.buffer, uintptr(size))
-
+	size, _, _ := procBufferGetSize.Call(uintptr(unsafe.Pointer(buf)))
+	r1, _, _ := procBufferGetData.Call(uintptr(unsafe.Pointer(buf)), uintptr(size))
 	return uintptrToBytes(r1, int(size))
 }

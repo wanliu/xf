@@ -16,12 +16,14 @@ func unsafeString(p string) unsafe.Pointer {
 
 func uintptrToBytes(ptr uintptr, size int) []byte {
 	if ptr != 0 {
-		us := make([]byte, size)
+		us := make([]byte, 0, size)
 		p := ptr
 		for i := 0; i < size; i++ {
 			u := *(*byte)(unsafe.Pointer(p + uintptr(i)))
 			us = append(us, u)
 		}
+
+		return us
 	}
 
 	return nil
@@ -630,10 +632,9 @@ func QTTSAudioInfo(sessionID string) string {
 }
 
 // int MSPAPI QTTSGetParam(const char* sessionID, const char* paramName, char* paramValue, unsigned int* valueLen);
-func QTTSGetParam(sessionID string, paramName string, ) (string, error) {
+func QTTSGetParam(sessionID string, paramName string) (string, error) {
 	var valueLen uint
 	var pValue = make([]byte, 32)
-
 
 	r1, _, _ := procQTTSGetParam.Call(
 		uintptr(unsafeString(sessionID)),

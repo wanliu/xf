@@ -11,6 +11,8 @@ import (
 )
 
 func receiveEvent(evt *Event) {
+	// log.Printf("evt: %#v", evt)
+
 	switch evt.EventType() {
 	case EventState:
 		state := (StateType)(evt.Arg1())
@@ -97,9 +99,10 @@ func TestXFUI(t *testing.T) {
 	}
 
 	listener := NewListener(receiveEvent)
+	log.Printf("Listener %#v", listener)
 
 	agent := NewAgent(string(buf), listener)
-	t.Logf("Agent %#v", agent)
+	log.Printf("Agent %#v", agent)
 	// agent.Start()
 	time.Sleep(time.Second)
 	agent.Weakup()

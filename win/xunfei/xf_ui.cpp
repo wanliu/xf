@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 using namespace aiui;
+using namespace std;
 
 struct _Listener {
 	AIUIListener* clListener;
@@ -31,12 +33,21 @@ struct _DataBundle {
 	IDataBundle *bundle;
 };
 
+
+class TestListener : public IAIUIListener
+{
+public:
+	~TestListener() {}
+	void onEvent(const IAIUIEvent& event) const;
+};
+
 class AIUICallbackListener: virtual public AIUIListener {
 	private:
 		void (*_callback)(int idx, const Event* evt);
 
 	public:
 	int index;
+	~AIUICallbackListener() {}
 
 	void onEvent(const IAIUIEvent& event) const {
 		if (this->_callback) {
@@ -178,15 +189,25 @@ int BufferGetSize(MessageBuffer *buffer) {
 	return buffer->buffer->size();
 }
 
-int xfuiCreateListener(int idx, void(*fcn)(int idx, const Event*), Listener *listner) {
-	listner->clListener = createListener(idx, fcn)->clListener;
+int xfuiCreateListener(int idx, void(*fcn)(int idx, const Event*), Listener *listener) {
+	AIUICallbackListener* li = new AIUICallbackListener();
+	li->index = idx;
+	li->setCallback(fcn);
+	listener->clListener = li;
+
 	return 0;
 }
 
 int xfuiCreateAgent(const char *params, const Listener *listener, Agent* agent) {
 	IAIUIAgent* aiagent = IAIUIAgent::createAgent(params, listener->clListener);
-	// Agent* agent = new Agent();
-	agent->agent = createAgent(params, listener)->agent;
+	agent->agent = aiagent;
+	return 0;
+}
+
+int xfuiCreateAgentTest(const char *params, const Listener *listener, Agent* agent) {
+	TestListener* li = new(TestListener);
+	IAIUIAgent* aiagent = IAIUIAgent::createAgent(params, li);
+	agent->agent = aiagent;
 	return 0;
 }
 
@@ -260,8 +281,7 @@ int xfuiDataBundlePutBinary(DataBundle* bundle, const char *key, MessageBuffer *
 }
 
 void xfuiDataBundleGetBinary(DataBundle* bundle, const char *key, MessageBuffer* buffer) {
-
-	buffer->buffer = DataBundleGetBinary(bundle, key)->buffer;
+	buffer->buffer = bundle->bundle->getBinary(key);
 }
 
 void xfuiAllocBuffer(int len, MessageBuffer* buffer) {
@@ -278,4 +298,88 @@ void* xfuiBufferGetData(MessageBuffer* buffer) {
 
 int xfuiBufferGetSize(MessageBuffer *buffer) {
 	return BufferGetSize(buffer);
+}
+
+
+/*
+AIUI 事件回调接口
+*/
+void TestListener::onEvent(const IAIUIEvent& event) const
+{
+	switch (event.getEventType()) {
+		/* 状态回调        */
+	case AIUIConstant::EVENT_STATE:
+	{
+		switch (event.getArg1()) {
+		case AIUIConstant::STATE_IDLE:
+		{
+			cout << "EVENT_STATE:" << "IDLE" << endl;
+		} break;
+
+		case AIUIConstant::STATE_READY:
+		{
+			cout << "EVENT_STATE:" << "READY" << endl;
+		} break;
+
+		case AIUIConstant::STATE_WORKING:
+		{
+			cout << "EVENT_STATE:" << "WORKING" << endl;
+		} break;
+		}
+	} break;
+
+	/* 唤醒事件回调        ， 唤醒成功会调用此接口，并且看到唤醒信息               */
+
+	case AIUIConstant::EVENT_WAKEUP:
+	{
+		cout << "EVENT_WAKEUP:" << event.getInfo() << endl;
+	} break;
+
+	/* 休眠事件回调            */
+	case AIUIConstant::EVENT_SLEEP:
+	{
+		cout << "EVENT_SLEEP:arg1=" << event.getArg1() << endl;
+	} break;
+
+	/* VAD事件回调，检测到前后端点  */
+	case AIUIConstant::EVENT_VAD:
+	{
+		switch (event.getArg1()) {
+		case AIUIConstant::VAD_BOS:
+		{
+			cout << "EVENT_VAD:" << "BOS" << endl;
+		} break;
+
+		case AIUIConstant::VAD_EOS:
+		{
+			cout << "EVENT_VAD:" << "EOS" << endl;
+		} break;
+
+		case AIUIConstant::VAD_VOL:
+		{
+			//						cout << "EVENT_VAD:" << "VOL" << endl;
+		} break;
+		}
+	} break;
+
+	/*
+	最重要的结果事件回调，收到文本和语音语义都会返回此事件，里面有结果信息
+	*/
+	case AIUIConstant::EVENT_RESULT:
+	{
+	
+		cout << "EVENT_RESULT:" << event.getEventType() << endl;
+			
+	} break;
+
+	case AIUIConstant::EVENT_ERROR:
+	{
+		cout << "EVENT_ERROR:" << event.getArg1() << endl;
+	} break;
+	case AIUIConstant::EVENT_CMD_RETURN:
+	{
+		cout << "EVENT_CMD_RETURN: CMD " << event.getArg1() << ", Return code:" << event.getArg2() <<
+			", Info:" << event.getInfo() << endl;
+	} break;
+	}
 }

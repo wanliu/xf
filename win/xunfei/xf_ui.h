@@ -66,10 +66,13 @@ XUNFEI_API void xfuiAllocBuffer(int len, MessageBuffer* buffer);
 XUNFEI_API int xfuiDeallocBuffer(MessageBuffer* buf);
 XUNFEI_API void* xfuiBufferGetData(MessageBuffer* buffer);
 XUNFEI_API int xfuiBufferGetSize(MessageBuffer *buffer);
+XUNFEI_API int xfuiCreateAgentTest(const char *params, const Listener *listener, Agent* agent);
 
 
 #ifdef __cplusplus    
 }
+
+
 #endif
 #endif
 
